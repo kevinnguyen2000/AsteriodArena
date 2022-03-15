@@ -57,8 +57,11 @@ void init()
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
+	// initialise rgb mode, double buffer and depth buffering.
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutCreateWindow("Tutorial 1");
+	glutCreateWindow("Asteriod Arena");
+	// makes window full screen.
+	glutFullScreen();
 
 	init();
 
