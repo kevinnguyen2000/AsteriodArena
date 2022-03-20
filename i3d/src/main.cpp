@@ -20,7 +20,14 @@ void display(void)
 	glEnable(GL_DEPTH_TEST);
 
 	/* Put drawing code here */
-	// ...
+	// Green quad
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_POINTS);
+	glVertex3f(-0.25, -0.25, -0.75);
+	glVertex3f(0.75, -0.25, -0.75);
+	glVertex3f(0.75, 0.75, -0.75);
+	glVertex3f(-0.25, 0.75, -0.75);
+	glEnd();
 
 	/* Always check for errors! */
 	int err;
