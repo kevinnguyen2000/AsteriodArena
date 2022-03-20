@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "../vs/Arena.h"
+
 #if _WIN32
 #   include <Windows.h>
 #endif
@@ -12,29 +14,14 @@
 #   include <GL/gl.h>
 #   include <GL/glu.h>
 #   include <GL/glut.h>
-#endif
+#endif;
 
 void display(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
+	// Make arena object and display
+	Arena* arena = new Arena();
+	arena->display();
 
-	/* Put drawing code here */
-	// Green quad
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_POINTS);
-	glVertex3f(-0.25, -0.25, -0.75);
-	glVertex3f(0.75, -0.25, -0.75);
-	glVertex3f(0.75, 0.75, -0.75);
-	glVertex3f(-0.25, 0.75, -0.75);
-	glEnd();
-
-	/* Always check for errors! */
-	int err;
-	while ((err = glGetError()) != GL_NO_ERROR)
-		printf("display: %s\n", gluErrorString(err));
-
-	glutSwapBuffers();
 }
 
 /* You can ignore this for now, it just lets you exit when you press 'q' or ESC */
