@@ -396,3 +396,17 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+*.exe
+*.exe
+*.ilk
+*.pdb
+i3d/vs/.vs/i3d/v16/.suo
+*.db
+*.log
+*.tlog
+*.tlog
+i3d/vs/x64/Debug/i3d.tlog/CL.write.1.tlog
+i3d/vs/x64/Debug/i3d.tlog/link.read.1.tlog
+i3d/vs/x64/Debug/i3d.tlog/link.write.1.tlog
+i3d/vs/x64/Debug/vc142.idb
+i3d/vs/x64/Debug/vc142.pdb
