@@ -1,10 +1,12 @@
 #include "../vs/Arena.h"
 #include "../vs/Types.h"
 
-void display(void)
+// Create arena object
+Arena* arena;
+
+void display()
 {
-	// Make arena object and call display it
-	Arena* arena = new Arena();
+	// Call arena display function
 	arena->display();
 	
 }
@@ -26,19 +28,19 @@ void keyboard(unsigned char key, int x, int y)
 // Tute 3 code for reshaping
 void on_reshape(int w, int h)
 {
-	fprintf(stderr, "on_reshape(%d, %d)\n", w, h);
-	glViewport(w/2, h/2, w, h);
+	//fprintf(stderr, "on_reshape(%d, %d)\n", w, h);
+	glViewport(0, 0, w, h);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-1.0, w, -1.0, h, -1.0, 1.0);
+
+	// Create arena object with width and height parameters
+	Arena* arena = new Arena(w, h);
 }
 
 void init(int* argcp, char** argv)
 {
-	/* In this program these OpenGL calls only need to be done once,
-	  but normally they would go elsewhere, e.g. display */
-
 	glutInit(argcp, argv);
 	// initialise rgb mode, double buffer and depth buffering.
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
