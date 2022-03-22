@@ -6,7 +6,7 @@
 class Arena {
 public:
 	// Constructor and Deconstructor 
-	Arena(int width, int height);
+	Arena();
 	~Arena();
 
 	// Copy constrcutor
@@ -14,6 +14,9 @@ public:
 
 	// Displays Arena
 	void display();
+
+	// Set arena height and width
+	void setArena(int width, int height);
 
 	// private class variables
 	private: 

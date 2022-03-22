@@ -2,7 +2,7 @@
 #include "../vs/Types.h"
 
 // Create arena object
-Arena* arena;
+Arena* arena = new Arena();
 
 void display()
 {
@@ -28,15 +28,14 @@ void keyboard(unsigned char key, int x, int y)
 // Tute 3 code for reshaping
 void on_reshape(int w, int h)
 {
-	//fprintf(stderr, "on_reshape(%d, %d)\n", w, h);
+	fprintf(stderr, "testing dynamic arena (%d, %d)\n", w, h);
 	glViewport(0, 0, w, h);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-1.0, w, -1.0, h, -1.0, 1.0);
 
-	// Create arena object with width and height parameters
-	Arena* arena = new Arena(w, h);
+	arena->setArena(w, h);
 }
 
 void init(int* argcp, char** argv)

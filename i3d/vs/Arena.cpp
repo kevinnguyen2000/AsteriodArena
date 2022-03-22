@@ -1,9 +1,10 @@
 #include "Arena.h"
 
-Arena::Arena(int width, int height) {
-	this->width = width;
-	this->height = height;
-	fprintf(stderr, "WIDTH AND HEIGHT(%d, %d)\n", width, height);
+Arena::Arena() {
+	
+	this->width = 0;
+	this->height = 0;
+	
 }
 
 Arena::~Arena() {
@@ -13,6 +14,12 @@ Arena::~Arena() {
 Arena::Arena(Arena& other) {
 	this->width = other.width;
 	this->height = other.height;
+}
+
+void Arena::setArena(int width, int height) {
+	this->width = width;
+	this->height = height;
+	//fprintf(stderr, "w and h(%d, %d)\n", width, height);
 }
 
 
@@ -46,7 +53,7 @@ void Arena::display() {
 	glPointSize(2.0);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
-	glVertex3f(0, 864, 0.5);
+	glVertex3f(0, height, 0.5);
 	glVertex3f(0, 0, 0.5);
 	glEnd();
 
@@ -55,8 +62,8 @@ void Arena::display() {
 	glPointSize(2.0);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
-	glVertex3f(0, 864, 0.5);
-	glVertex3f(1536, 864, 0.5);
+	glVertex3f(0, height, 0.5);
+	glVertex3f(width, height, 0.5);
 	glEnd();
 
 	// Right border
@@ -64,8 +71,8 @@ void Arena::display() {
 	glPointSize(2.0);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
-	glVertex3f(1536, 864, 0.5);
-	glVertex3f(1536, 0, 0.5);
+	glVertex3f(width, height, 0.5);
+	glVertex3f(width, 0, 0.5);
 	glEnd();
 
 	// Bottom border
@@ -74,7 +81,7 @@ void Arena::display() {
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
 	glVertex3f(0, 0, 0.5);
-	glVertex3f(1536, 0, 0.5);
+	glVertex3f(width, 0, 0.5);
 	glEnd();
 
 	int err;
