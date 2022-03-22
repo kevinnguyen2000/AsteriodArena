@@ -1,33 +1,14 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "../vs/Arena.h"
+#include "../vs/Types.h"
 
-#if _WIN32
-#   include <Windows.h>
-#endif
-#if __APPLE__
-#   include <OpenGL/gl.h>
-#   include <OpenGL/glu.h>
-#   include <GLUT/glut.h>
-#else
-#   include <GL/gl.h>
-#   include <GL/glu.h>
-#   include <GL/glut.h>
-#endif
+// Create arena object
+Arena* arena = new Arena();
 
-void display(void)
+void display()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
-
-	/* Put drawing code here */
-	// ...
-
-	/* Always check for errors! */
-	int err;
-	while ((err = glGetError()) != GL_NO_ERROR)
-		printf("display: %s\n", gluErrorString(err));
-
-	glutSwapBuffers();
+	// Call arena display function
+	arena->display();
+	
 }
 
 /* You can ignore this for now, it just lets you exit when you press 'q' or ESC */
@@ -44,30 +25,37 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void init()
+// Tute 3 code for reshaping
+void on_reshape(int w, int h)
 {
-	/* In this program these OpenGL calls only need to be done once,
-	  but normally they would go elsewhere, e.g. display */
+	fprintf(stderr, "testing dynamic arena (%d, %d)\n", w, h);
+	glViewport(0, 0, w, h);
 
 	glMatrixMode(GL_PROJECTION);
-	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glOrtho(-1.0, w, -1.0, h, -1.0, 1.0);
+
+	arena->setArena(w, h);
 }
 
-int main(int argc, char** argv)
+void init(int* argcp, char** argv)
 {
-	glutInit(&argc, argv);
+	glutInit(argcp, argv);
 	// initialise rgb mode, double buffer and depth buffering.
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow("Asteriod Arena");
 	// makes window full screen.
 	glutFullScreen();
 
-	init();
+	glutReshapeFunc(on_reshape);
 
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
-	glutMainLoop();
+}
 
+int main(int argc, char** argv)
+{
+	init(&argc, argv);
+	glutMainLoop();
 	return EXIT_SUCCESS;
 }

@@ -9,5 +9,16 @@
     <ClCompile Include="..\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Arena.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Arena.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
