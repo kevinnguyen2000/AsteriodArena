@@ -1,13 +1,27 @@
 #include "../vs/Arena.h"
+#include "../vs/Player.h"
 #include "../vs/Types.h"
 
 // Create arena object
 Arena* arena = new Arena();
 
+// Create player object
+Player* player = new Player();
+
 void display()
 {
-	// Call arena display function
+	// clears previous renders if existed
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glDisable(GL_DEPTH_TEST);
+
 	arena->display();
+	player->display();
+
+	int err;
+	while ((err = glGetError()) != GL_NO_ERROR)
+		printf("display: %s\n", gluErrorString(err));
+
+	glutSwapBuffers();
 	
 }
 

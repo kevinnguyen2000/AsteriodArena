@@ -12,7 +12,7 @@ public:
 	// Copy constrcutor
 	Arena(Arena& other);
 
-	// Displays Arena
+	// Displays arena
 	void display();
 
 	// Set arena height and width

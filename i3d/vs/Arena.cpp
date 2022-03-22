@@ -25,10 +25,6 @@ void Arena::setArena(int width, int height) {
 
 void Arena::display() {
 
-	// clears previous renders if existed
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDisable(GL_DEPTH_TEST);
-
 	/*
 	// One pixel stars
 	glColor3f(1.0, 1.0, 1.0);
@@ -83,10 +79,4 @@ void Arena::display() {
 	glVertex3f(0, 0, 0.5);
 	glVertex3f(width, 0, 0.5);
 	glEnd();
-
-	int err;
-	while ((err = glGetError()) != GL_NO_ERROR)
-		printf("display: %s\n", gluErrorString(err));
-
-	glutSwapBuffers();
 }
