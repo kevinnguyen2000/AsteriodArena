@@ -62,6 +62,7 @@ void init(int* argcp, char** argv)
 	glutFullScreen();
 
 	glutReshapeFunc(on_reshape);
+
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
 }
