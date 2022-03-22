@@ -1,8 +1,4 @@
 #include "Arena.h"
-#include <iostream>
-
-
-using namespace std;
 
 Arena::Arena() {
 
@@ -13,6 +9,7 @@ void Arena::display() {
 	// One pixel stars
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POINTS);
+	glVertex3f(1, 1, -0.75);
 	glVertex3f(-0.25, -0.3, -0.75);
 	glVertex3f(0.85, -0.25, -0.75);
 	glVertex3f(0.75, 0.75, -0.75);
@@ -78,6 +75,14 @@ void Arena::display() {
 	glVertex3f(-0.605, -0.47, -0.5);
 	glEnd();
 
+	// Larger star
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_POLYGON);
+	glVertex3f(10, -10, -0.5);
+	glVertex3f(-10, -10, -0.5);
+	glVertex3f(-10, 10, -0.5);
+	glVertex3f(10, 10, -0.5);
+	glEnd();
 
 	int err;
 	while ((err = glGetError()) != GL_NO_ERROR)
