@@ -38,10 +38,20 @@ void Player::display() {
 	glEnd();
 	// this is just so we can see where its pointing
 	glBegin(GL_LINES);
-	glColor3f(1.0, 0.0, 0.0);
+	glColor3f(0.0, 0.0, 0.0);
 	glVertex3f(model_offset, model_offset, 0.0);
 	glVertex3f(v1x, v1y, 0.0);
 	glEnd();
+	// make outline of spaceship
+	glLineWidth(2.0);
+	glBegin(GL_LINE_LOOP);
+	glColor3f(0.0, 0.5, 1.0);
+	glVertex3f(v1x, v1y, 0.0);
+	glVertex3f(v2x, v2y, 0.0);
+	glVertex3f(v3x, v3y, 0.0);
+	glVertex3f(v4x, v4y, 0.0);
+	glEnd();
+
 	glPopMatrix();
 
 }
