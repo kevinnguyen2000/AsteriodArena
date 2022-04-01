@@ -9,10 +9,13 @@ public:
 	Vector();
 	~Vector();
 
+	float getX();
+	float getY();
+
 	// private class variables
 	private:
-		int x;
-		int y;
+		float x;
+		float y;
 };
 
 #endif

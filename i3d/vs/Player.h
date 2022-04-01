@@ -2,6 +2,7 @@
 #define PLAYER
 
 #include "Types.h"
+#include "Vector.h"
 
 class Player {
 public:
@@ -12,13 +13,10 @@ public:
 	// Displays player
 	void display();
 
-	// Set player starting postion
-	void setPlayerInitalPosition(int initalX, int intialY);
-
 	// private class variables
 private:
-	int intialX;
-	int initalY;
+	Vector* positonVector;
+	Vector* directionVector;
 };
 
 #endif

@@ -1,7 +1,8 @@
 #include "Player.h"
 
 Player::Player() {
-
+	this->positonVector = new Vector;
+	this->directionVector = new Vector;
 }
 
 Player::~Player() {
@@ -56,6 +57,3 @@ void Player::display() {
 
 }
 
-void Player::setPlayerInitalPosition(int intialX, int initalY) {
-
-}

@@ -10,3 +10,11 @@ Vector::Vector() {
 Vector::~Vector() {
 
 }
+
+float Vector::getX() {
+	return x;
+}
+
+float Vector::getY() {
+	return y;
+}
