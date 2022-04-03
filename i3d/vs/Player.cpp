@@ -1,8 +1,9 @@
 #include "Player.h"
 
 Player::Player() {
-	this->positonVector = new Vector;
-	this->directionVector = new Vector;
+	this->positonVector;
+	// set starting angle so player faces up
+	this->directionVector.push_back(0);
 }
 
 Player::~Player() {
@@ -30,6 +31,7 @@ void Player::display() {
 	// This renders the triangle in its local-coordinate frame
 	glPushMatrix();
 	glLoadIdentity();
+	glRotatef(directionVector[0], 0.0f, 0.0f, 1.0f);
 	glBegin(GL_POLYGON);
 	glColor3f(1.0, 1.0, 1.0);
 	glVertex3f(v1x, v1y, 0.0);
@@ -55,5 +57,25 @@ void Player::display() {
 
 	glPopMatrix();
 
+}
+
+void Player::moveFoward() {
+	printf("move foward ");
+}
+
+void Player::rotateLeft() {
+	int angle = directionVector[0];
+	// sets turn angle
+	angle = angle + 5;
+	// assign in new angle.
+	directionVector[0] = angle;
+}
+
+void Player::rotateRight() {
+	int angle = directionVector[0];
+	// sets turn angle
+	angle = angle - 5;
+	// assign in new angle.
+	directionVector[0] = angle;
 }
 

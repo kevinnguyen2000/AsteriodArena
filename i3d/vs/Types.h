@@ -3,6 +3,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <string.h>
+#include <stdbool.h>
 
 #if _WIN32
 #   include <Windows.h>

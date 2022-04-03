@@ -1,5 +1,22 @@
-﻿  main.cpp
-  Player.cpp
-  Vector.cpp
-  Generating Code...
+﻿  Player.cpp
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Player.cpp(67,12): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Player.cpp(71,23): warning C4244: '=': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Player.cpp(75,12): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Player.cpp(79,23): warning C4244: '=': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
   i3d.vcxproj -> C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\i3d64dbg.exe

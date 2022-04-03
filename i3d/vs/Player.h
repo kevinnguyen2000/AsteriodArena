@@ -13,10 +13,19 @@ public:
 	// Displays player
 	void display();
 
+	// Moves player foward
+	void moveFoward();
+
+	// Rotate player left
+	void rotateLeft();
+
+	// Rotate player right
+	void rotateRight();
+
 	// private class variables
 private:
-	Vector* positonVector;
-	Vector* directionVector;
+	std::vector<float> directionVector;
+	std::vector<float> positonVector;
 };
 
 #endif

@@ -34,9 +34,29 @@ void keyboard(unsigned char key, int x, int y)
 	case 'q':
 		exit(EXIT_SUCCESS);
 		break;
+	case 'w':
+		player->moveFoward();
+		break;
+	case 'a':
+		player->rotateLeft();
+		break;
+	case 'd':
+		player->rotateRight();
+		break;
 	default:
 		break;
 	}
+}
+
+void on_idle()
+{
+	//update_game_state();
+	glutPostRedisplay();
+}
+
+void run_app()
+{
+	glutMainLoop();
 }
 
 // Tute 3 code for reshaping
@@ -65,11 +85,14 @@ void init(int* argcp, char** argv)
 
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
+
+	// idle function
+	glutIdleFunc(on_idle);
 }
 
 int main(int argc, char** argv)
 {
 	init(&argc, argv);
-	glutMainLoop();
+	run_app();
 	return EXIT_SUCCESS;
 }
