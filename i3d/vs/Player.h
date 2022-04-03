@@ -24,8 +24,11 @@ public:
 
 	// private class variables
 private:
-	std::vector<float> directionVector;
-	std::vector<float> positonVector;
+	Vector* directionVector;
+	Vector* positionVector;
+	int angle;
+	//std::vector<float> directionVector;
+	//std::vector<float> positonVector;
 };
 
 #endif

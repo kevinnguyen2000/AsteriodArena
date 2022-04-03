@@ -1,9 +1,21 @@
 #include "Player.h"
 
 Player::Player() {
-	this->positonVector;
-	// set starting angle so player faces up
+	// Set angle
+	this->angle = 0;
+	// Vector for postion
+	this->positionVector = new Vector();
+	// Vector for angle
+	this->directionVector = new Vector();
+
+	/*
+	// Set x coordinate
+	this->positonVector.push_back(0);
+	// Set y coordinate
+	this->positonVector.push_back(0);
+	// Set starting angle so player faces up
 	this->directionVector.push_back(0);
+	*/
 }
 
 Player::~Player() {
@@ -31,7 +43,8 @@ void Player::display() {
 	// This renders the triangle in its local-coordinate frame
 	glPushMatrix();
 	glLoadIdentity();
-	glRotatef(directionVector[0], 0.0f, 0.0f, 1.0f);
+	glRotatef(angle, 0.0f, 0.0f, 1.0f);
+	glTranslatef(0.0f, 0.0f, 0.0f);
 	glBegin(GL_POLYGON);
 	glColor3f(1.0, 1.0, 1.0);
 	glVertex3f(v1x, v1y, 0.0);
@@ -64,18 +77,16 @@ void Player::moveFoward() {
 }
 
 void Player::rotateLeft() {
-	int angle = directionVector[0];
 	// sets turn angle
 	angle = angle + 5;
 	// assign in new angle.
-	directionVector[0] = angle;
+	
 }
 
 void Player::rotateRight() {
-	int angle = directionVector[0];
 	// sets turn angle
 	angle = angle - 5;
 	// assign in new angle.
-	directionVector[0] = angle;
+	
 }
 
