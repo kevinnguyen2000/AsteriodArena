@@ -33,3 +33,21 @@ Vector Math::multiplyVector(Vector* a, float s) {
 
 	return *multipliedVector;
 }
+
+float Math::findVectorLength(Vector* a) {
+	float length = sqrt(a->getX() * a->getX() + a->getY() * a->getY());
+	
+	return length;
+}
+
+float Math::dotProduct(Vector* a, Vector* b) {
+	float dotProduct = a->getX() * b->getX() + a->getY() * b->getY();
+
+	return dotProduct;
+}
+
+float Math::angleBetweenVectors(Vector* a, Vector* b) {
+	float degrees = acos(dotProduct(a, b) / (findVectorLength(a) * findVectorLength(b)));
+
+	return degrees;
+}

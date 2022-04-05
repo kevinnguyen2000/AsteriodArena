@@ -13,6 +13,12 @@ public:
 
 	Vector multiplyVector(Vector* a, float s);
 
+	float findVectorLength(Vector* a);
+
+	float dotProduct(Vector* a, Vector* b);
+
+	float angleBetweenVectors(Vector* a, Vector* b);
+
 	// private class variables
 	private:
 		float PI = 3.14159265359;
