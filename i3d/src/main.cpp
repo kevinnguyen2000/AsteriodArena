@@ -8,10 +8,13 @@ Arena* arena = new Arena();
 // Create player object
 Player* player = new Player();
 
+float world_size = 25.0f;
+
 void display()
 {
 	// clears previous renders if existed
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_DEPTH_TEST);
 
 	arena->display();
@@ -65,9 +68,12 @@ void on_reshape(int w, int h)
 	fprintf(stderr, "testing dynamic arena (%d, %d)\n", w, h);
 	glViewport(0, 0, w, h);
 
+	const float half_world_size = world_size / 2.0;
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-1.0, w, -1.0, h, -1.0, 1.0);
+	
+	glOrtho(-w / 2, w / 2, -h / 2, h / 2, -1.0, 1.0);
 
 	arena->setArena(w, h);
 }

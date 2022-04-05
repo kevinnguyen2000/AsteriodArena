@@ -49,8 +49,8 @@ void Arena::display() {
 	glPointSize(2.0);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
-	glVertex3f(0, height, 0.5);
-	glVertex3f(0, 0, 0.5);
+	glVertex3f(-width/2, height/2, 0.5);
+	glVertex3f(-width/2, -height/2, 0.5);
 	glEnd();
 
 	// Top border 
@@ -58,8 +58,8 @@ void Arena::display() {
 	glPointSize(2.0);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
-	glVertex3f(0, height, 0.5);
-	glVertex3f(width, height, 0.5);
+	glVertex3f(-width/2, height/2, 0.5);
+	glVertex3f(width/2, height/2, 0.5);
 	glEnd();
 
 	// Right border
@@ -67,8 +67,8 @@ void Arena::display() {
 	glPointSize(2.0);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
-	glVertex3f(width, height, 0.5);
-	glVertex3f(width, 0, 0.5);
+	glVertex3f(width/2, height/2, 0.5);
+	glVertex3f(width/2, -height/2, 0.5);
 	glEnd();
 
 	// Bottom border
@@ -76,7 +76,7 @@ void Arena::display() {
 	glPointSize(2.0);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
-	glVertex3f(0, 0, 0.5);
-	glVertex3f(width, 0, 0.5);
+	glVertex3f(-width, -height/2, 0.5);
+	glVertex3f(width/2, -height/2, 0.5);
 	glEnd();
 }

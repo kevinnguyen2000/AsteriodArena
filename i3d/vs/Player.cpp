@@ -43,16 +43,24 @@ void Player::display() {
 	// This renders the triangle in its local-coordinate frame
 	glPushMatrix();
 	glLoadIdentity();
+	//glTranslatef(0.0f, 0.0f, 0.0f);
 	glRotatef(angle, 0.0f, 0.0f, 1.0f);
-	glTranslatef(0.0f, 0.0f, 0.0f);
+	//glScalef(0.2f, 0.2f, 0.2f);
 	glBegin(GL_POLYGON);
 	glColor3f(1.0, 1.0, 1.0);
+	/*
 	glVertex3f(v1x, v1y, 0.0);
 	glVertex3f(v2x, v2y, 0.0);
 	glVertex3f(v3x, v3y, 0.0);
 	glVertex3f(v4x, v4y, 0.0);
+	*/
+	glVertex3f(-10, 0, 0.0);
+	glVertex3f(0, -10, 0.0);
+	glVertex3f(10, 0, 0.0);
+	glVertex3f(0, 10, 0.0);
 	glEnd();
 	// this is just so we can see where its pointing
+	/*
 	glBegin(GL_LINES);
 	glColor3f(0.0, 0.0, 0.0);
 	glVertex3f(model_offset, model_offset, 0.0);
@@ -66,8 +74,9 @@ void Player::display() {
 	glVertex3f(v2x, v2y, 0.0);
 	glVertex3f(v3x, v3y, 0.0);
 	glVertex3f(v4x, v4y, 0.0);
-	glEnd();
 
+	glEnd();
+	*/
 	glPopMatrix();
 
 }
