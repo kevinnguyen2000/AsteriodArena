@@ -9,6 +9,8 @@ public:
 	// Convert angle into direction vector
 	Vector degreeToDirectionVector(float degrees);
 
+	Vector subtractVector(Vector *a, Vector *b);
+
 	// private class variables
 	private:
 		float PI = 3.14159265359;

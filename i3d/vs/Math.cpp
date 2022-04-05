@@ -17,3 +17,11 @@ Vector Math::degreeToDirectionVector(float degrees) {
 
 	return *directionVector;
 }
+
+Vector Math::subtractVector(Vector *a, Vector *b) {
+	Vector* subtractedVector = new Vector();
+	subtractedVector->setX(a->getX() - b->getX());
+	subtractedVector->setY(a->getY() - b->getY());
+
+	return *subtractedVector;
+}
