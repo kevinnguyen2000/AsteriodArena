@@ -11,6 +11,8 @@ public:
 
 	Vector subtractVector(Vector *a, Vector *b);
 
+	Vector addVector(Vector* a, Vector* b);
+
 	Vector multiplyVector(Vector* a, float s);
 
 	float findVectorLength(Vector* a);

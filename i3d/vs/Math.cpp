@@ -26,6 +26,14 @@ Vector Math::subtractVector(Vector *a, Vector *b) {
 	return *subtractedVector;
 }
 
+Vector Math::addVector(Vector* a, Vector* b) {
+	Vector* addedVector = new Vector();
+	addedVector->setX(a->getX() + b->getX());
+	addedVector->setY(a->getY() + b->getY());
+
+	return *addedVector;
+}
+
 Vector Math::multiplyVector(Vector* a, float s) {
 	Vector* multipliedVector = new Vector();
 	multipliedVector->setX(a->getX() * s);
