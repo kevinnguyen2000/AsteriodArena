@@ -27,8 +27,6 @@ private:
 	Vector* directionVector;
 	Vector* positionVector;
 	int angle;
-	//std::vector<float> directionVector;
-	//std::vector<float> positonVector;
 };
 
 #endif

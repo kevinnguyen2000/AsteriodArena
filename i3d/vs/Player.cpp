@@ -2,29 +2,17 @@
 
 Player::Player() {
 	// Set angle
-	this->angle = 0;
+	this->angle = 90;
 	// Vector for postion
 	this->positionVector = new Vector();
 	// Vector for angle
 	this->directionVector = new Vector();
-
-	/*
-	// Set x coordinate
-	this->positonVector.push_back(0);
-	// Set y coordinate
-	this->positonVector.push_back(0);
-	// Set starting angle so player faces up
-	this->directionVector.push_back(0);
-	*/
 }
 
 Player::~Player() {
-
 }
 
 void Player::display() {
-
-	// Red triangle - local coordinates
 	// This renders the triangle in its local-coordinate frame
 	glPushMatrix();
 	glLoadIdentity();
@@ -71,7 +59,6 @@ void Player::display() {
 
 	glEnd();
 	glPopMatrix();
-
 }
 
 void Player::moveFoward() {
@@ -81,14 +68,12 @@ void Player::moveFoward() {
 void Player::rotateLeft() {
 	// sets turn angle
 	angle = angle + 5;
-	// assign in new angle.
-	
+	// assign in new angle.	
 }
 
 void Player::rotateRight() {
 	// sets turn angle
 	angle = angle - 5;
 	// assign in new angle.
-	
 }
 
