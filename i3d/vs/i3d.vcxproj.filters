@@ -15,10 +15,10 @@
     <ClCompile Include="Player.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Game_Input.cpp">
+    <ClCompile Include="Vector.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
+    <ClCompile Include="Math.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="Player.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Game_Input.h">
+    <ClInclude Include="Vector.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
+    <ClInclude Include="Math.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

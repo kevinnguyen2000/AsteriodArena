@@ -18,3 +18,11 @@ float Vector::getX() {
 float Vector::getY() {
 	return y;
 }
+
+void Vector::setX(float x) {
+	this->x = x;
+}
+
+void Vector::setY(float y) {
+	this->y = y;
+}

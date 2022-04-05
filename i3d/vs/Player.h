@@ -3,6 +3,7 @@
 
 #include "Types.h"
 #include "Vector.h"
+#include "Math.h"
 
 class Player {
 public:
@@ -26,7 +27,8 @@ public:
 private:
 	Vector* directionVector;
 	Vector* positionVector;
-	int angle;
+	float angle;
+	Math* math;
 };
 
 #endif

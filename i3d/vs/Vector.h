@@ -12,6 +12,9 @@ public:
 	float getX();
 	float getY();
 
+	void setX(float x);
+	void setY(float y);
+
 	// private class variables
 	private:
 		float x;

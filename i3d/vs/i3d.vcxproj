@@ -157,12 +157,12 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="Arena.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Game_Input.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.h" />
-    <ClInclude Include="Game_Input.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Types.h" />

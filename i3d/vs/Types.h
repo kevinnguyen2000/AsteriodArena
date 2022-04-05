@@ -7,6 +7,7 @@
 #include <vector>
 #include <string.h>
 #include <stdbool.h>
+#include <cmath>
 
 #if _WIN32
 #   include <Windows.h>

@@ -7,6 +7,8 @@ Player::Player() {
 	this->positionVector = new Vector();
 	// Vector for angle
 	this->directionVector = new Vector();
+	// Intialise Math helper class
+	this->math = new Math();
 }
 
 Player::~Player() {
@@ -68,12 +70,26 @@ void Player::moveFoward() {
 void Player::rotateLeft() {
 	// sets turn angle
 	angle = angle + 5;
-	// assign in new angle.	
+	// check for overflow
+	if (angle >= 360) {
+		angle = 0;
+	}
+	// assign in new angle to Player direction vector
+	*directionVector = math->degreeToDirectionVector(angle);
 }
 
 void Player::rotateRight() {
 	// sets turn angle
 	angle = angle - 5;
-	// assign in new angle.
+	// check for overflow
+	if (angle <= -360) {
+		angle = 0;
+	}
+	// assign in new angle to Player direction vector
+	*directionVector = math->degreeToDirectionVector(angle);
+	// tester
+	/*
+	printf("Directionvector, X and Y: (%f, %f)\n", directionVector->getX(), directionVector->getY());
+	*/
 }
 
