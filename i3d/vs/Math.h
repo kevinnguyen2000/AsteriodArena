@@ -11,6 +11,8 @@ public:
 
 	Vector subtractVector(Vector *a, Vector *b);
 
+	Vector multiplyVector(Vector* a, float s);
+
 	// private class variables
 	private:
 		float PI = 3.14159265359;

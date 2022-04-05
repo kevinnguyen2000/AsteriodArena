@@ -25,3 +25,11 @@ Vector Math::subtractVector(Vector *a, Vector *b) {
 
 	return *subtractedVector;
 }
+
+Vector Math::multiplyVector(Vector* a, float s) {
+	Vector* multipliedVector = new Vector();
+	multipliedVector->setX(a->getX() * s);
+	multipliedVector->setY(a->getY() * s);
+
+	return *multipliedVector;
+}
