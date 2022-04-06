@@ -8,7 +8,7 @@ Arena* arena = new Arena();
 // Create player object
 Player* player = new Player();
 
-float world_size = 25.0f;
+float g_last_time = 0.0;
 
 void display()
 {
@@ -51,9 +51,26 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
+void update_game_state(float dt) {
+	// tester
+	// printf("DT: (%f)\n", dt);
+	player->setDt(dt);
+}
+
+// function for calculating dt , from lec 2
+float calc_dt() {
+	float cur_time = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+	float dt = cur_time - g_last_time;
+	g_last_time = cur_time;
+
+	//printf("DT, CT, LAST_T: (%f)(%f)(%f)\n", dt, cur_time, g_last_time);
+	return dt;
+}
+
 void on_idle()
 {
-	//update_game_state();
+	float dt = calc_dt();
+	update_game_state(dt);
 	glutPostRedisplay();
 }
 
@@ -67,8 +84,6 @@ void on_reshape(int w, int h)
 {
 	fprintf(stderr, "testing dynamic arena (%d, %d)\n", w, h);
 	glViewport(0, 0, w, h);
-
-	const float half_world_size = world_size / 2.0;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

@@ -1,14 +1,17 @@
 #include "Player.h"
 
 Player::Player() {
+	// Intialise Math helper class
+	this->math = new Math();
+	this->movementSpeed = 0;
+	this->dt = 0;
 	// Set angle
 	this->angle = 90;
 	// Vector for postion
 	this->positionVector = new Vector();
 	// Vector for angle
 	this->directionVector = new Vector();
-	// Intialise Math helper class
-	this->math = new Math();
+	*directionVector = math->degreeToDirectionVector(angle);
 }
 
 Player::~Player() {
@@ -19,7 +22,7 @@ void Player::display() {
 	glPushMatrix();
 	glLoadIdentity();
 
-	//glTranslatef(0.0f, 0.0f, 0.0f);
+	glTranslatef(positionVector->getX(), positionVector->getY(), 0.0f);
 	glRotatef(angle, 0.0f, 0.0f, 1.0f);
 	glScalef(1.5f, 1.5f, 1.5f);
 
@@ -64,7 +67,18 @@ void Player::display() {
 }
 
 void Player::moveFoward() {
-	printf("move foward ");
+	// Set movement speed to 3000
+	this->movementSpeed = 3000;
+
+	Vector* newCoords = new Vector();
+	newCoords->setX(positionVector->getX() + directionVector->getX() * movementSpeed * dt);
+	newCoords->setY(positionVector->getY() + directionVector->getY() * movementSpeed * dt);
+	
+	positionVector->setX(newCoords->getX());
+	positionVector->setY(newCoords->getY());
+	printf("Positionvector, X and Y: (%f, %f)\n", positionVector->getX(), directionVector->getY());
+	
+	
 }
 
 void Player::rotateLeft() {
@@ -91,5 +105,9 @@ void Player::rotateRight() {
 	/*
 	printf("Directionvector, X and Y: (%f, %f)\n", directionVector->getX(), directionVector->getY());
 	*/
+}
+
+void Player::setDt(float dt) {
+	this->dt = dt;
 }
 

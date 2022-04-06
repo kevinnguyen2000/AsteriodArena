@@ -23,12 +23,18 @@ public:
 	// Rotate player right
 	void rotateRight();
 
+	// Set dt
+	void setDt(float dt);
+
 	// private class variables
 private:
 	Vector* directionVector;
 	Vector* positionVector;
 	float angle;
+	float movementSpeed;
+	float dt;
 	Math* math;
+	
 };
 
 #endif
