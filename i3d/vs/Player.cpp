@@ -22,6 +22,7 @@ void Player::display() {
 	glPushMatrix();
 	glLoadIdentity();
 
+	glColor3f(1.0, 1.0, 1.0);
 	glTranslatef(positionVector->getX(), positionVector->getY(), 0.0f);
 	glRotatef(angle, 0.0f, 0.0f, 1.0f);
 	glScalef(1.5f, 1.5f, 1.5f);

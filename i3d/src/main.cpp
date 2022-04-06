@@ -42,18 +42,16 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	case 'w':
 		player->moveFoward();
+		// Check wall collision
 		*playerPosition = player->getPositionVector();
 		arena->setCircleWorldPositionVector(playerPosition);
+		arena->checkWallCollision();
 		break;
 	case 'a':
 		player->rotateLeft();
-		*playerPosition = player->getPositionVector();
-		arena->setCircleWorldPositionVector(playerPosition);
 		break;
 	case 'd':
 		player->rotateRight();
-		*playerPosition = player->getPositionVector();
-		arena->setCircleWorldPositionVector(playerPosition);
 		break;
 	default:
 		break;

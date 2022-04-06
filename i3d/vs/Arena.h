@@ -10,9 +10,6 @@ public:
 	Arena();
 	~Arena();
 
-	// Copy constrcutor
-	Arena(Arena& other);
-
 	// Displays arena
 	void display();
 
@@ -22,6 +19,9 @@ public:
 	// Set circle world position vector
 	void setCircleWorldPositionVector(Vector* positonVector);
 
+	// Check for wall collision
+	void checkWallCollision();
+
 	// Private class variables
 	private: 
 		int width;
@@ -29,6 +29,7 @@ public:
 		Vector* circleWorldPosition;
 		Vector* arenaSize;
 		float circleRadius;
+		float leftWallColour, rightWallColour, topWallColour, bottomWallColour;
 };
 
 #endif
