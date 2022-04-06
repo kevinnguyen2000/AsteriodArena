@@ -67,8 +67,8 @@ void Player::display() {
 }
 
 void Player::moveFoward() {
-	// Set movement speed to 3000
-	this->movementSpeed = 3000;
+	// Set movement speed to 2500
+	this->movementSpeed = 2500;
 
 	Vector* newCoords = new Vector();
 	newCoords->setX(positionVector->getX() + directionVector->getX() * movementSpeed * dt);
@@ -76,9 +76,7 @@ void Player::moveFoward() {
 	
 	positionVector->setX(newCoords->getX());
 	positionVector->setY(newCoords->getY());
-	printf("Positionvector, X and Y: (%f, %f)\n", positionVector->getX(), directionVector->getY());
-	
-	
+	//printf("Positionvector, X and Y: (%f, %f)\n", positionVector->getX(), positionVector->getY());
 }
 
 void Player::rotateLeft() {
@@ -109,5 +107,9 @@ void Player::rotateRight() {
 
 void Player::setDt(float dt) {
 	this->dt = dt;
+}
+
+Vector Player::getPositionVector() {
+	return *positionVector;
 }
 

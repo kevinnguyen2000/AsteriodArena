@@ -1,10 +1,9 @@
 #include "Arena.h"
 
 Arena::Arena() {
-	
 	this->width = 0;
 	this->height = 0;
-	
+	this->circleWorldPosition = new Vector();
 }
 
 Arena::~Arena() {
@@ -79,4 +78,11 @@ void Arena::display() {
 	glVertex3f(-width, -height/2, 0.5);
 	glVertex3f(width/2, -height/2, 0.5);
 	glEnd();
+}
+
+void Arena::setCircleWorldPositionVector(Vector* positionVector) {
+	circleWorldPosition->setX(positionVector->getX());
+	circleWorldPosition->setY(positionVector->getY());
+	// tester
+	printf("circlePosition, X and Y: (%f, %f)\n", circleWorldPosition->getX(), circleWorldPosition->getY());
 }

@@ -8,6 +8,9 @@ Arena* arena = new Arena();
 // Create player object
 Player* player = new Player();
 
+// Vector for player positon
+Vector* playerPosition = new Vector();
+
 float g_last_time = 0.0;
 
 void display()
@@ -39,12 +42,18 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	case 'w':
 		player->moveFoward();
+		*playerPosition = player->getPositionVector();
+		arena->setCircleWorldPositionVector(playerPosition);
 		break;
 	case 'a':
 		player->rotateLeft();
+		*playerPosition = player->getPositionVector();
+		arena->setCircleWorldPositionVector(playerPosition);
 		break;
 	case 'd':
 		player->rotateRight();
+		*playerPosition = player->getPositionVector();
+		arena->setCircleWorldPositionVector(playerPosition);
 		break;
 	default:
 		break;

@@ -26,6 +26,8 @@ public:
 	// Set dt
 	void setDt(float dt);
 
+	Vector getPositionVector();
+
 	// private class variables
 private:
 	Vector* directionVector;
@@ -34,7 +36,6 @@ private:
 	float movementSpeed;
 	float dt;
 	Math* math;
-	
 };
 
 #endif

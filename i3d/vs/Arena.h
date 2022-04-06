@@ -2,6 +2,7 @@
 #define ARENA
 
 #include "Types.h"
+#include "Vector.h"
 
 class Arena {
 public:
@@ -18,10 +19,16 @@ public:
 	// Set arena height and width
 	void setArena(int width, int height);
 
-	// private class variables
+	// Set circle world position vector
+	void setCircleWorldPositionVector(Vector* positonVector);
+
+	// Private class variables
 	private: 
 		int width;
 		int height;
+		Vector* circleWorldPosition;
+		Vector* arenaSize;
+		float circleRadius;
 };
 
 #endif
