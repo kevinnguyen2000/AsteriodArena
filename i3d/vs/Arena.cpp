@@ -15,6 +15,8 @@ Arena::Arena() {
 	this->rightWallColour = 1;
 	this->topWallColour = 1;
 	this->bottomWallColour = 1;
+
+	this->collision = false;
 }
 
 Arena::~Arena() {
@@ -106,6 +108,9 @@ void Arena::checkWallCollision() {
 	else {
 		leftWallColour = 1;
 	}
+	if (circleWorldPosition->getX() < leftWall) {
+		collision = true;
+	}
 	// check top wall
 	float topWall = arenaSize->getY() / 2;
 	if (circleWorldPosition->getY() + circleRadius > topWall) {
@@ -113,6 +118,9 @@ void Arena::checkWallCollision() {
 	}
 	else {
 		topWallColour = 1;
+	}
+	if (circleWorldPosition->getY() > topWall) {
+		collision = true;
 	}
 	// check right wall
 	float rightWall = arenaSize->getX() / 2;
@@ -122,6 +130,9 @@ void Arena::checkWallCollision() {
 	else {
 		rightWallColour = 1;
 	}
+	if (circleWorldPosition->getX() > rightWall) {
+		collision = true;
+	}
 	// check bottom wall
 	float bottomWall = -arenaSize->getY() / 2;
 	if (circleWorldPosition->getY() - circleRadius < bottomWall) {
@@ -130,5 +141,15 @@ void Arena::checkWallCollision() {
 	else {
 		bottomWallColour = 1;
 	}
+	if (circleWorldPosition->getY() < bottomWall) {
+		collision = true;
+	}
+}
 
+bool Arena::getCollision() {
+	return collision;
+}
+
+void Arena::setCollisionFalse() {
+	collision = false;
 }

@@ -13,6 +13,13 @@ Vector* playerPosition = new Vector();
 
 float g_last_time = 0.0;
 
+void reset_game() {
+	// Set collision back to false
+	arena->setCollisionFalse();
+	// Set player position back to starting state
+	player->resetPlayer();
+}
+
 void display()
 {
 	// clears previous renders if existed
@@ -46,6 +53,9 @@ void keyboard(unsigned char key, int x, int y)
 		*playerPosition = player->getPositionVector();
 		arena->setCircleWorldPositionVector(playerPosition);
 		arena->checkWallCollision();
+		if (arena->getCollision() == true) {
+			reset_game();
+		}
 		break;
 	case 'a':
 		player->rotateLeft();

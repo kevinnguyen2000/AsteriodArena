@@ -28,6 +28,9 @@ public:
 
 	Vector getPositionVector();
 
+	// Reset player position
+	void resetPlayer();
+
 	// private class variables
 private:
 	Vector* directionVector;

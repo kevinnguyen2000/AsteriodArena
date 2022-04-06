@@ -22,6 +22,10 @@ public:
 	// Check for wall collision
 	void checkWallCollision();
 
+	// Get and set collision
+	bool getCollision();
+	void setCollisionFalse();
+
 	// Private class variables
 	private: 
 		int width;
@@ -30,6 +34,7 @@ public:
 		Vector* arenaSize;
 		float circleRadius;
 		float leftWallColour, rightWallColour, topWallColour, bottomWallColour;
+		bool collision;
 };
 
 #endif
