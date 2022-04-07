@@ -68,6 +68,11 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
+void on_mouse_button(int button, int state, int x, int y)
+{
+	printf("shoot");
+}
+
 void update_game_state(float dt) {
 	// tester
 	// printf("DT: (%f)\n", dt);
@@ -123,6 +128,7 @@ void init(int* argcp, char** argv)
 
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
+	glutMouseFunc(on_mouse_button);
 
 	// idle function
 	glutIdleFunc(on_idle);

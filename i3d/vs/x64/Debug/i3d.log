@@ -1,4 +1,7 @@
-﻿  Arena.cpp
+﻿  main.cpp
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(26,12): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(84,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Arena.cpp
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Arena.cpp(59,29): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Arena.cpp(59,19): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Arena.cpp(60,30): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
@@ -17,4 +20,10 @@ C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Anima
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Arena.cpp(87,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Arena.cpp(91,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Arena.cpp(92,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Math.cpp
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(26,12): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Player.cpp
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(26,12): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Vector.cpp
+  Generating Code...
   i3d.vcxproj -> C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\i3d64dbg.exe
