@@ -15,10 +15,8 @@ Vector* playerPosition = new Vector();
 Vector* playerDirection = new Vector();
 
 // Vector of bullets
-std::vector<Bullet> bullets;
-Bullet* bullet = new Bullet(0, 0);
-Vector* bulletPosition = new Vector();
-Vector* bulletDirection = new Vector();
+std::vector<Bullet>* bullets = new std::vector<Bullet>;
+Bullet* bullet = new Bullet();
 
 float g_last_time = 0.0;
 
@@ -38,10 +36,10 @@ void display()
 
 	arena->display();
 	player->display();
-	if (bullets.size() > 0) {
-		bullet->display(bullets);
+	if (bullets->size() > 0) {
+		bullet->display(*bullets);
 	}
-	
+		
 	int err;
 	while ((err = glGetError()) != GL_NO_ERROR)
 		printf("display: %s\n", gluErrorString(err));
@@ -82,13 +80,41 @@ void keyboard(unsigned char key, int x, int y)
 
 void on_mouse_button(int button, int state, int x, int y)
 {
-	*bulletPosition = player->getPositionVector();
-	*bulletDirection = player->getDirectionVector();
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 
-	// Make new bullet on left click press
-	Bullet* bullet = new Bullet(bulletDirection, bulletPosition);
-	// add Bullet to bullet array
-	bullets.push_back(*bullet);
+		// Make new bullet on left click press
+		Bullet* newBullet = new Bullet();
+
+		// Set in normal variables
+		newBullet->setBulletPositionVector(player->getPositionVector().getX(), player->getPositionVector().getY());
+
+		//printf("PLAYER POS: (%f) (%f) \n", player->getPositionVector().getX(), player->getPositionVector().getY());
+		//printf("NEW BULLET POS: (%f) (%f) \n", newBullet->getPositionVector().getX(), newBullet->getPositionVector().getY());
+
+		// add Bullet to bullet array
+		bullets->push_back(*newBullet);
+
+		for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
+			printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
+		}
+
+		/*
+		float a = bullets->front().getPositionVector().getX();
+		float b = bullets->front().getPositionVector().getY();
+
+		float n = bullets->back().getPositionVector().getX();
+		float m = bullets->back().getPositionVector().getY();
+
+		float bulletsSize = bullets->size();
+
+		
+		printf("First bullet: (%f) (%f) \n", a, b);
+		printf("Last bullet: (%f) (%f) \n", n, m);
+		printf("Bullets size: (%f) \n", bulletsSize);
+		*/
+		
+		
+	}
 }
 
 void update_game_state(float dt) {

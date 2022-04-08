@@ -7,13 +7,19 @@
 
 class Bullet {
 public:
-	Bullet(Vector* directionVector, Vector* positionVector);
+	Bullet();
 
 	void display(std::vector<Bullet> bullets);
 
 	void setDt(float dt);
 
+	//void setVectors(Vector positionVector, Vector directionVector);
+
+	void setBulletPositionVector(float x, float y);
+
 	void bulletDirection(Bullet bullet);
+
+	Vector getPositionVector();
 
 private:
 	Vector* directionVector;
