@@ -27,6 +27,7 @@ public:
 	void setDt(float dt);
 
 	Vector getPositionVector();
+	Vector getDirectionVector();
 
 	// Reset player position
 	void resetPlayer();

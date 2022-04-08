@@ -114,6 +114,10 @@ Vector Player::getPositionVector() {
 	return *positionVector;
 }
 
+Vector Player::getDirectionVector() {
+	return *directionVector;
+}
+
 void Player::resetPlayer() {
 	movementSpeed = 0;
 	angle = 90;

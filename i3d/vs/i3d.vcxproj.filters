@@ -21,6 +21,9 @@
     <ClCompile Include="Math.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.h">
@@ -36,6 +39,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

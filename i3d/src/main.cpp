@@ -1,6 +1,7 @@
 #include "../vs/Arena.h"
 #include "../vs/Player.h"
 #include "../vs/Types.h"
+#include "../vs/Bullet.h"
 
 // Create arena object
 Arena* arena = new Arena();
@@ -10,6 +11,14 @@ Player* player = new Player();
 
 // Vector for player positon
 Vector* playerPosition = new Vector();
+// Vector for player direction
+Vector* playerDirection = new Vector();
+
+// Vector of bullets
+std::vector<Bullet> bullets;
+Bullet* bullet = new Bullet(0, 0);
+Vector* bulletPosition = new Vector();
+Vector* bulletDirection = new Vector();
 
 float g_last_time = 0.0;
 
@@ -29,7 +38,10 @@ void display()
 
 	arena->display();
 	player->display();
-
+	if (bullets.size() > 0) {
+		bullet->display(bullets);
+	}
+	
 	int err;
 	while ((err = glGetError()) != GL_NO_ERROR)
 		printf("display: %s\n", gluErrorString(err));
@@ -70,13 +82,20 @@ void keyboard(unsigned char key, int x, int y)
 
 void on_mouse_button(int button, int state, int x, int y)
 {
-	printf("shoot");
+	*bulletPosition = player->getPositionVector();
+	*bulletDirection = player->getDirectionVector();
+
+	// Make new bullet on left click press
+	Bullet* bullet = new Bullet(bulletDirection, bulletPosition);
+	// add Bullet to bullet array
+	bullets.push_back(*bullet);
 }
 
 void update_game_state(float dt) {
 	// tester
 	// printf("DT: (%f)\n", dt);
 	player->setDt(dt);
+	bullet->setDt(dt);
 }
 
 // function for calculating dt , from lec 2
