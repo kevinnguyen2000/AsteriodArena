@@ -10,13 +10,10 @@ Bullet::Bullet() {
 }
 
 void Bullet::display(std::vector<Bullet> bullets) {
+	for (Bullet bullet : bullets) {
 
-	glPushMatrix();
-	glLoadIdentity();
-
-    Bullet bullet = bullets.back();
-	
-	//for (Bullet bullet : bullets) {
+		glPushMatrix();
+		glLoadIdentity();
 
 		//printf("First bullet: (%f) (%f) \n", bullet.positionVector->getX(), bullet.positionVector->getY());
 
@@ -29,11 +26,8 @@ void Bullet::display(std::vector<Bullet> bullets) {
 		glBegin(GL_POINTS);
 		glVertex3f(0.0, 0.0, 0.0);
 		glEnd();
-
-		//printf("Bullet: (%f) (%f) \n", bullet.positionVector->getX(), bullet.positionVector->getY());
-	//}
-
-	glPopMatrix();
+		glPopMatrix();
+	}
 }
 
 void Bullet::setDt(float dt) {

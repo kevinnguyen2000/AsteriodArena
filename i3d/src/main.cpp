@@ -94,9 +94,11 @@ void on_mouse_button(int button, int state, int x, int y)
 		// add Bullet to bullet array
 		bullets->push_back(*newBullet);
 
+		/*
 		for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
 			printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
 		}
+		*/
 
 		/*
 		float a = bullets->front().getPositionVector().getX();
