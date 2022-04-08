@@ -87,6 +87,7 @@ void on_mouse_button(int button, int state, int x, int y)
 
 		// Set in normal variables
 		newBullet->setBulletPositionVector(player->getPositionVector().getX(), player->getPositionVector().getY());
+		newBullet->setDirectionVector(player->getDirectionVector().getX(), player->getDirectionVector().getY());
 
 		//printf("PLAYER POS: (%f) (%f) \n", player->getPositionVector().getX(), player->getPositionVector().getY());
 		//printf("NEW BULLET POS: (%f) (%f) \n", newBullet->getPositionVector().getX(), newBullet->getPositionVector().getY());

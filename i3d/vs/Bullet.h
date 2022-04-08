@@ -13,9 +13,8 @@ public:
 
 	void setDt(float dt);
 
-	//void setVectors(Vector positionVector, Vector directionVector);
-
 	void setBulletPositionVector(float x, float y);
+	void setDirectionVector(float x, float y);
 
 	void bulletDirection(Bullet bullet);
 

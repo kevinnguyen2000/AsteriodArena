@@ -27,6 +27,8 @@ void Bullet::display(std::vector<Bullet> bullets) {
 		glVertex3f(0.0, 0.0, 0.0);
 		glEnd();
 		glPopMatrix();
+
+		bulletDirection(bullet);
 	}
 }
 
@@ -48,14 +50,12 @@ Vector Bullet::getPositionVector() {
 	return *positionVector;
 }
 
-/*
-void Bullet::setVectors(Vector positionVector, Vector directionVector) {
-	this->positionVector = positionVector;
-	this->directionVector = directionVector;
-}
-*/
-
 void Bullet::setBulletPositionVector(float x, float y) {
 	this->positionVector->setX(x);
 	this->positionVector->setY(y);
+}
+
+void Bullet::setDirectionVector(float x, float y) {
+	this->directionVector->setX(x);
+	this->directionVector->setY(y);
 }
