@@ -24,6 +24,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Asteriod.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.h">
@@ -42,6 +45,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteriod.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -159,11 +159,13 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Asteriod.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Asteriod.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Player.h" />

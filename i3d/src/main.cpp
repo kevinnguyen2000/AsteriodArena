@@ -2,6 +2,7 @@
 #include "../vs/Player.h"
 #include "../vs/Types.h"
 #include "../vs/Bullet.h"
+#include "../vs/Asteriod.h"
 
 // Create arena object
 Arena* arena = new Arena();
@@ -23,11 +24,17 @@ float g_last_time = 0.0;
 float maxShipFireRate = 0.25;
 float shipFireRateCounter = 0;
 
+// Vector of asteriods
+std::vector<Asteriod>* asteriods = new std::vector<Asteriod>;
+Asteriod* asteriod = new Asteriod();
+
 void reset_game() {
 	// Set collision back to false
 	arena->setCollisionFalse();
 	// Set player position back to starting state
 	player->resetPlayer();
+	// clears all bullets on screen
+	bullets->clear();
 }
 
 void display()
@@ -122,7 +129,6 @@ void fire_bullet() {
 
 	// check if bullet is outside arena bounds
 	checkBulletBounds();
-
 	
 	for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
 		printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
@@ -145,6 +151,8 @@ void fire_bullet() {
 	printf("Bullets size: (%f) \n", bulletsSize);
 	*/
 }
+
+
 
 void on_mouse_button(int button, int state, int x, int y)
 {
@@ -199,6 +207,9 @@ void on_reshape(int w, int h)
 	glOrtho(-w / 2, w / 2, -h / 2, h / 2, -1.0, 1.0);
 
 	arena->setArena(w, h);
+
+	// set asteriod spawn radius
+	asteriod->setSpawnRadius(w, h);
 }
 
 void init(int* argcp, char** argv)
