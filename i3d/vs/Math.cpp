@@ -59,3 +59,17 @@ float Math::angleBetweenVectors(Vector* a, Vector* b) {
 
 	return degrees;
 }
+
+int Math::calculateYFromX(int x, float radius) {
+	int yCoord = radius * radius - x * x;
+	yCoord = sqrt(yCoord);
+	// Generate either minus or positive y Coord
+	srand(time(0));
+	int sign = rand() % 2;
+	printf("sign: %d\n", sign);
+	if (sign == 0) {
+		yCoord = -yCoord;
+	}
+	//printf("YCoord: %d", yCoord);
+	return yCoord;
+}

@@ -21,6 +21,8 @@ public:
 
 	float angleBetweenVectors(Vector* a, Vector* b);
 
+	int calculateYFromX(int x, float radius);
+
 	// private class variables
 	private:
 		float PI = 3.14159265359;

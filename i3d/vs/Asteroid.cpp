@@ -6,7 +6,7 @@ Asteroid::Asteroid() {
 	this->radiusVector = new Vector();
 	this->math = new Math();
 	this->spawnRadius = 0;
-	this->maxAsteroidRadius = 100;
+	this->maxAsteroidRadius = 50;
 	this->angle = 0;
 	this->dt = 0;
 	this->movementSpeed = 0;
@@ -24,18 +24,24 @@ void Asteroid::setSpawnRadius(float x, float y) {
 
 void Asteroid::generateSpawnPoint() {
 	// Use radius vector to set min max for x coord number generation
-	int maxRandNumber = radiusVector->getX() * 2;
-	int randMinus = radiusVector->getX();
+	int maxRandNumber = spawnRadius * 2;
+	int randMinus = spawnRadius;
+	printf("MaxRandNumber: %d\n", maxRandNumber);
 
 	// Generate random x coord 
 	srand(time(0));
-	for (int i = 0; i < 10; i++) {
-		int asteroidXCoord = rand() % maxRandNumber;
-		asteroidXCoord = asteroidXCoord - randMinus;
-		printf("Asteriod x coord: %d\n", asteroidXCoord);
-	}
-
+	int asteroidXCoord = rand() % maxRandNumber;
+	asteroidXCoord = asteroidXCoord - randMinus;
+	
+	// helper method
+	//int asteroidXCoord = spawnRadius;
+	
 	// Calc y from random x coord
+	int asteroidYCoord = math->calculateYFromX(asteroidXCoord, spawnRadius);
 
 	// Set asteroid position vector to coords
+	positionVector->setX(asteroidXCoord);
+	positionVector->setY(asteroidYCoord);
+
+	printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
 }
