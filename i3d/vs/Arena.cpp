@@ -153,3 +153,11 @@ bool Arena::getCollision() {
 void Arena::setCollisionFalse() {
 	collision = false;
 }
+
+int Arena::getArenaHeight() {
+	return height;
+}
+
+int Arena::getArenaWidth() {
+	return width;
+}

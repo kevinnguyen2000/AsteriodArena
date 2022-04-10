@@ -16,6 +16,10 @@ public:
 	// Set arena height and width
 	void setArena(int width, int height);
 
+	// Get arena height and width
+	int getArenaHeight();
+	int getArenaWidth();
+
 	// Set circle world position vector
 	void setCircleWorldPositionVector(Vector* positonVector);
 

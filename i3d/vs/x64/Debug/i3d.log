@@ -1,3 +1,4 @@
-﻿  Bullet.cpp
+﻿  main.cpp
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(26,12): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(165,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   i3d.vcxproj -> C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\i3d64dbg.exe

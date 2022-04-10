@@ -20,6 +20,9 @@ Bullet* bullet = new Bullet();
 
 float g_last_time = 0.0;
 
+float maxShipFireRate = 0.25;
+float shipFireRateCounter = 0;
+
 void reset_game() {
 	// Set collision back to false
 	arena->setCollisionFalse();
@@ -78,51 +81,81 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
+void checkBulletBounds() {
+	auto it = bullets->begin();
+	while (it != bullets->end()) {
+		// checks left wall
+		if (it->getPositionVector().getX() < -arena->getArenaWidth() / 2) {
+			it = bullets->erase(it);
+		}
+		// checks top wall
+		if (it->getPositionVector().getY() > arena->getArenaHeight() /2) {
+			it = bullets->erase(it);
+		}
+		// checks right wall
+		if (it->getPositionVector().getX() > arena->getArenaWidth() / 2) {
+			it = bullets->erase(it);
+		}
+		// checks bottom wall
+		if (it->getPositionVector().getY() < -arena->getArenaHeight() / 2) {
+			it = bullets->erase(it);
+		}
+		else {
+			it++;
+		}
+	}
+}
+
+void fire_bullet() {
+	// Make new bullet on left click press
+	Bullet* newBullet = new Bullet();
+
+	// Set in normal variables
+	newBullet->setBulletPositionVector(player->getPositionVector().getX(), player->getPositionVector().getY());
+	newBullet->setDirectionVector(player->getDirectionVector().getX(), player->getDirectionVector().getY());
+
+	// add Bullet to bullet array
+	bullets->push_back(*newBullet);
+
+	// Set counter back to zero
+	shipFireRateCounter = 0;
+
+	// check if bullet is outside arena bounds
+	checkBulletBounds();
+
+	
+	for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
+		printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
+	}
+	printf("\n");
+	
+
+	/*
+	float a = bullets->front().getPositionVector().getX();
+	float b = bullets->front().getPositionVector().getY();
+
+	float n = bullets->back().getPositionVector().getX();
+	float m = bullets->back().getPositionVector().getY();
+
+	float bulletsSize = bullets->size();
+
+
+	printf("First bullet: (%f) (%f) \n", a, b);
+	printf("Last bullet: (%f) (%f) \n", n, m);
+	printf("Bullets size: (%f) \n", bulletsSize);
+	*/
+}
+
 void on_mouse_button(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-
-		// Make new bullet on left click press
-		Bullet* newBullet = new Bullet();
-
-		// Set in normal variables
-		newBullet->setBulletPositionVector(player->getPositionVector().getX(), player->getPositionVector().getY());
-		newBullet->setDirectionVector(player->getDirectionVector().getX(), player->getDirectionVector().getY());
-
-		//printf("PLAYER POS: (%f) (%f) \n", player->getPositionVector().getX(), player->getPositionVector().getY());
-		//printf("NEW BULLET POS: (%f) (%f) \n", newBullet->getPositionVector().getX(), newBullet->getPositionVector().getY());
-
-		// add Bullet to bullet array
-		bullets->push_back(*newBullet);
-
-		/*
-		for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
-			printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
+		if (shipFireRateCounter >= maxShipFireRate) {
+			fire_bullet();
 		}
-		*/
-
-		/*
-		float a = bullets->front().getPositionVector().getX();
-		float b = bullets->front().getPositionVector().getY();
-
-		float n = bullets->back().getPositionVector().getX();
-		float m = bullets->back().getPositionVector().getY();
-
-		float bulletsSize = bullets->size();
-
-		
-		printf("First bullet: (%f) (%f) \n", a, b);
-		printf("Last bullet: (%f) (%f) \n", n, m);
-		printf("Bullets size: (%f) \n", bulletsSize);
-		*/
-		
-		
 	}
 }
 
 void update_game_state(float dt) {
-	// tester
-	// printf("DT: (%f)\n", dt);
 	player->setDt(dt);
 	bullet->setDt(dt);
 }
@@ -132,8 +165,13 @@ float calc_dt() {
 	float cur_time = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	float dt = cur_time - g_last_time;
 	g_last_time = cur_time;
+	// update counter
+	shipFireRateCounter = shipFireRateCounter + dt;
+	/*
+	printf("dt: %f \n", dt);
+	printf("Counter: %f", shipFireRateCounter);
+	*/
 
-	//printf("DT, CT, LAST_T: (%f)(%f)(%f)\n", dt, cur_time, g_last_time);
 	return dt;
 }
 
