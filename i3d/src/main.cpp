@@ -2,7 +2,7 @@
 #include "../vs/Player.h"
 #include "../vs/Types.h"
 #include "../vs/Bullet.h"
-#include "../vs/Asteriod.h"
+#include "../vs/Asteroid.h"
 
 // Create arena object
 Arena* arena = new Arena();
@@ -25,8 +25,8 @@ float maxShipFireRate = 0.25;
 float shipFireRateCounter = 0;
 
 // Vector of asteriods
-std::vector<Asteriod>* asteriods = new std::vector<Asteriod>;
-Asteriod* asteriod = new Asteriod();
+std::vector<Asteroid>* asteroids = new std::vector<Asteroid>;
+Asteroid* asteroid = new Asteroid();
 
 void reset_game() {
 	// Set collision back to false
@@ -130,11 +130,12 @@ void fire_bullet() {
 	// check if bullet is outside arena bounds
 	checkBulletBounds();
 	
+	/*
 	for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
 		printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
 	}
 	printf("\n");
-	
+	*/
 
 	/*
 	float a = bullets->front().getPositionVector().getX();
@@ -209,7 +210,9 @@ void on_reshape(int w, int h)
 	arena->setArena(w, h);
 
 	// set asteriod spawn radius
-	asteriod->setSpawnRadius(w, h);
+	asteroid->setSpawnRadius(w, h);
+	// testing spawn point
+	asteroid->generateSpawnPoint();
 }
 
 void init(int* argcp, char** argv)
