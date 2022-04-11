@@ -24,12 +24,12 @@ void Asteroid::setSpawnRadius(float x, float y) {
 
 void Asteroid::generateSpawnPoint() {
 	// Use radius vector to set min max for x coord number generation
-	int maxRandNumber = spawnRadius * 2;
+	int maxRandNumber = ceil (spawnRadius * 2);
 	int randMinus = spawnRadius;
 	printf("MaxRandNumber: %d\n", maxRandNumber);
 
 	// Generate random x coord 
-	srand(time(0));
+	srand((unsigned int)time(NULL));
 	int asteroidXCoord = rand() % maxRandNumber;
 	asteroidXCoord = asteroidXCoord - randMinus;
 	
@@ -44,4 +44,73 @@ void Asteroid::generateSpawnPoint() {
 	positionVector->setY(asteroidYCoord);
 
 	printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
+}
+
+void Asteroid::display(std::vector<Asteroid> asteroids) {
+	for (Asteroid asteroid : asteroids) {
+
+		glPushMatrix();
+		glLoadIdentity();
+
+		glColor3f(0.5, 0.5, 0.5);
+		glTranslatef(0.0, 0.0, 0.0f);
+		glRotatef(angle, 0.0f, 0.0f, 1.0f);
+		glScalef(7.0f, 7.0, 7.0f);
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(0, 10, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(7, 7, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(0, -10, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(-7, -7, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(-10, 0, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(-7, -7, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(-10, 0, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(-7, -7, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(-10, 0, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(-7, 7, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(-7, 7, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(0, 10, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(10, 0, 0.0);
+		glVertex3f(7, 7, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(10, 0, 0.0);
+		glVertex3f(7, -7, 0.0);
+		glVertex3f(0, 0, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(7, -7, 0.0);
+		glVertex3f(0, -10, 0.0);
+		glEnd();
+
+		glPopMatrix();
+	}
 }

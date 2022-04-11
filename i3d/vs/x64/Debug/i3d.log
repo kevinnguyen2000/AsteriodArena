@@ -2,7 +2,6 @@
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(28,12): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(27,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(28,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(32,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(43,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(44,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   i3d.vcxproj -> C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\i3d64dbg.exe

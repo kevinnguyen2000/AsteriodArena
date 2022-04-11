@@ -28,6 +28,11 @@ float shipFireRateCounter = 0;
 std::vector<Asteroid>* asteroids = new std::vector<Asteroid>;
 Asteroid* asteroid = new Asteroid();
 
+float maxAsteroidRate = 4;
+float asteroidSpawnRateCounter = 0;
+
+float width, height = 0;
+
 void reset_game() {
 	// Set collision back to false
 	arena->setCollisionFalse();
@@ -48,6 +53,9 @@ void display()
 	player->display();
 	if (bullets->size() > 0) {
 		bullet->display(*bullets);
+	}
+	if (asteroids->size() > 0) {
+		asteroid->display(*asteroids);
 	}
 		
 	int err;
@@ -85,6 +93,22 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	default:
 		break;
+	}
+}
+
+void checkAsteroidSpawn() {
+	if (asteroidSpawnRateCounter >= maxAsteroidRate) {
+		// Make Asteroid
+		Asteroid* newAsteroid = new Asteroid();
+		// set spawn radius
+		newAsteroid->setSpawnRadius(width, height);
+		// Generate spawn position for new asteroid
+		newAsteroid->generateSpawnPoint();
+		// Add new Asteroid to asteroids vector
+		asteroids->push_back(*newAsteroid);
+		
+		// Set asteroid counter back to zero
+		asteroidSpawnRateCounter = 0;
 	}
 }
 
@@ -167,6 +191,8 @@ void on_mouse_button(int button, int state, int x, int y)
 void update_game_state(float dt) {
 	player->setDt(dt);
 	bullet->setDt(dt);
+
+	checkAsteroidSpawn();
 }
 
 // function for calculating dt , from lec 2
@@ -174,12 +200,10 @@ float calc_dt() {
 	float cur_time = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	float dt = cur_time - g_last_time;
 	g_last_time = cur_time;
+
 	// update counter
 	shipFireRateCounter = shipFireRateCounter + dt;
-	/*
-	printf("dt: %f \n", dt);
-	printf("Counter: %f", shipFireRateCounter);
-	*/
+	asteroidSpawnRateCounter = asteroidSpawnRateCounter + dt;
 
 	return dt;
 }
@@ -209,10 +233,8 @@ void on_reshape(int w, int h)
 
 	arena->setArena(w, h);
 
-	// set asteriod spawn radius
-	asteroid->setSpawnRadius(w, h);
-	// testing spawn point
-	asteroid->generateSpawnPoint();
+	width = w;
+	height = h;
 }
 
 void init(int* argcp, char** argv)

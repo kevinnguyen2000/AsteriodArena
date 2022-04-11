@@ -13,6 +13,8 @@ public:
 
 	void generateSpawnPoint();
 
+	void display(std::vector<Asteroid> asteroids);
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;
