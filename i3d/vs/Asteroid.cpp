@@ -52,10 +52,12 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 		glPushMatrix();
 		glLoadIdentity();
 
+		// tester
+		// printf("Asteroid pos: %f %f\n", asteroid.positionVector->getX(), asteroid.positionVector->getY());
 		glColor3f(0.5, 0.5, 0.5);
-		glTranslatef(0.0, 0.0, 0.0f);
+		glTranslatef(asteroid.positionVector->getX(), asteroid.positionVector->getY(), 0.0f);
 		glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		glScalef(7.0f, 7.0, 7.0f);
+		glScalef(5.0f, 5.0f, 5.0f);
 
 		glBegin(GL_TRIANGLES);
 		glVertex3f(0, 10, 0.0);
@@ -113,4 +115,10 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 
 		glPopMatrix();
 	}
+}
+
+void Asteroid::asteroidDirection(Vector* playerVector) {
+	*directionVector = math->subtractVector(playerVector, positionVector);
+	// tester
+	printf("Asteroid direction vector: %f %f", directionVector->getX(), directionVector->getY());
 }

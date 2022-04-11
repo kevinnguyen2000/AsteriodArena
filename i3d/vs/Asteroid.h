@@ -15,6 +15,8 @@ public:
 
 	void display(std::vector<Asteroid> asteroids);
 
+	void asteroidDirection(Vector* playerVector);
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;

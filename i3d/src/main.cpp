@@ -104,6 +104,9 @@ void checkAsteroidSpawn() {
 		newAsteroid->setSpawnRadius(width, height);
 		// Generate spawn position for new asteroid
 		newAsteroid->generateSpawnPoint();
+		// Calc direction of asteroid
+		*playerPosition = player->getPositionVector();
+		newAsteroid->asteroidDirection(playerPosition);
 		// Add new Asteroid to asteroids vector
 		asteroids->push_back(*newAsteroid);
 		
