@@ -16,6 +16,7 @@ public:
 
 	// Moves player foward
 	void moveFoward();
+	void slowDown();
 
 	// Rotate player left
 	void rotateLeft();

@@ -261,6 +261,16 @@ void checkKeyStates() {
 		if (arena->getCollision() == true) {
 			reset_game();
 		}
+	} 
+	if (keys[w_key] == false) {
+		player->slowDown();
+		// Check wall collision
+		*playerPosition = player->getPositionVector();
+		arena->setCircleWorldPositionVector(playerPosition);
+		arena->checkWallCollision();
+		if (arena->getCollision() == true) {
+			reset_game();
+		}
 	}
 }
 

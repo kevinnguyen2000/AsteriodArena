@@ -100,7 +100,7 @@ void Player::display() {
 
 void Player::moveFoward() {
 	if (movementSpeed <= maxSpeed) {
-		this->movementSpeed = movementSpeed + 0.15;
+		this->movementSpeed = movementSpeed + 0.1;
 	}
 	else {
 		this->movementSpeed = movementSpeed;
@@ -110,6 +110,23 @@ void Player::moveFoward() {
 	newCoords->setX(positionVector->getX() + directionVector->getX() * movementSpeed * dt);
 	newCoords->setY(positionVector->getY() + directionVector->getY() * movementSpeed * dt);
 	
+	positionVector->setX(newCoords->getX());
+	positionVector->setY(newCoords->getY());
+	//printf("Positionvector, X and Y: (%f, %f)\n", positionVector->getX(), positionVector->getY());
+}
+
+void Player::slowDown() {
+	if (movementSpeed >= 0) {
+		this->movementSpeed = movementSpeed - 0.025;
+	}
+	else {
+		this->movementSpeed = 0;
+	}
+
+	Vector* newCoords = new Vector();
+	newCoords->setX(positionVector->getX() + directionVector->getX() * movementSpeed * dt);
+	newCoords->setY(positionVector->getY() + directionVector->getY() * movementSpeed * dt);
+
 	positionVector->setX(newCoords->getX());
 	positionVector->setY(newCoords->getY());
 	//printf("Positionvector, X and Y: (%f, %f)\n", positionVector->getX(), positionVector->getY());
