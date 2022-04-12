@@ -13,6 +13,7 @@ Player::Player() {
 	this->directionVector = new Vector();
 	*directionVector = math->degreeToDirectionVector(angle);
 	this->mulitpliedDirectionVector = new Vector();
+	this->maxSpeed = 120;
 }
 
 Player::~Player() {
@@ -98,8 +99,12 @@ void Player::display() {
 }
 
 void Player::moveFoward() {
-	// Set movement speed to 2500
-	this->movementSpeed = 75;
+	if (movementSpeed <= maxSpeed) {
+		this->movementSpeed = movementSpeed + 0.15;
+	}
+	else {
+		this->movementSpeed = movementSpeed;
+	}
 
 	Vector* newCoords = new Vector();
 	newCoords->setX(positionVector->getX() + directionVector->getX() * movementSpeed * dt);

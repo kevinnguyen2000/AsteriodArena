@@ -44,6 +44,7 @@ private:
 	float movementSpeed;
 	float dt;
 	Math* math;
+	float maxSpeed;
 };
 
 #endif
