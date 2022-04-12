@@ -12,7 +12,7 @@ Asteroid::Asteroid() {
 	this->movementSpeed = generateMovementSpeed();
 	// printf("Movement speed: %f\n", movementSpeed);
 	this->appeared = false;
-	this->asteroidRadius = 50;
+	this->asteroidRadius = 70;
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -64,7 +64,7 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 		glColor3f(0.5, 0.5, 0.5);
 		glTranslatef(asteroid->positionVector->getX(), asteroid->positionVector->getY(), 0.0f);
 		glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		glScalef(5.0f, 5.0f, 5.0f);
+		glScalef(3.0f, 3.0f, 3.0f);
 
 		glBegin(GL_TRIANGLES);
 		glVertex3f(0, 10, 0.0);
@@ -185,7 +185,7 @@ Vector Asteroid::getPositionVector() {
 
 bool Asteroid::checkBulletCollision(float bulletX, float bulletY) {
 	float distance = sqrt((positionVector->getX() - bulletX) * (positionVector->getX() - bulletX) + (positionVector->getY() - bulletY) * (positionVector->getY() - bulletY));
-	printf("distance: %f\n", distance);
+	// printf("distance: %f\n", distance);
 	if (maxAsteroidRadius >= distance) {
 		return true;
 	}

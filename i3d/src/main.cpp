@@ -239,8 +239,9 @@ void checkBulletAsteroidCollision() {
 	for (int i = 0; i < asteroids.size(); i++) {
 		for (int j = 0; j < bullets.size(); j++) {
 			if (asteroids[i]->checkBulletCollision(bullets[j]->getPositionVector().getX(), bullets[j]->getPositionVector().getY()) == true) {
-				printf("COLLOSION");
-				asteroids.clear();
+				// printf("COLLOSION");
+				asteroids.erase(asteroids.begin() + i);
+				bullets.erase(bullets.begin() + j);
 			}
 		}
 	}
