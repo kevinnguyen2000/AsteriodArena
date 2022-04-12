@@ -10,7 +10,8 @@ Asteroid::Asteroid() {
 	this->angle = 0;
 	this->dt = 0;
 	this->movementSpeed = generateMovementSpeed();
-	printf("Movement speed: %f\n", movementSpeed);
+	// printf("Movement speed: %f\n", movementSpeed);
+	this->appeared = false;
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -135,7 +136,6 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 		glPopMatrix();
 
 		asteroidMovement(asteroid);
-		
 	}
 }
 
@@ -168,4 +168,16 @@ float Asteroid::generateMovementSpeed() {
 	std::uniform_int_distribution<std::mt19937::result_type> movementRange(125, 225); 
 
 	return float (movementRange(rng));
+}
+
+void Asteroid::setAppearedTrue() {
+	this->appeared = true;
+}
+
+bool Asteroid::getAppeared() {
+	return appeared;
+}
+
+Vector Asteroid::getPositionVector() {
+	return *positionVector;
 }

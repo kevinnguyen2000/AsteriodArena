@@ -101,22 +101,18 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void checkAsteroidSpawn() {
-	if (asteroidSpawnRateCounter >= maxAsteroidRate) {
-		// Make Asteroid
-		Asteroid* newAsteroid = new Asteroid();
-		// set spawn radius
-		newAsteroid->setSpawnRadius(width, height);
-		// Generate spawn position for new asteroid
-		newAsteroid->generateSpawnPoint();
-		// Calc direction of asteroid
-		*playerPosition = player->getPositionVector();
-		newAsteroid->asteroidDirection(playerPosition);
-		// Add new Asteroid to asteroids vector
-		asteroids->push_back(*newAsteroid);
-		
-		// Set asteroid counter back to zero
-		asteroidSpawnRateCounter = 0;
+void checkAsteroidBounds() {
+	auto it = asteroids->begin();
+	while (it != asteroids->end()) {
+		// check if asteroid has entered arena, if so set appeared to true
+		if (it->getAppeared() == false) {
+			if (it->getPositionVector().getX() > -arena->getArenaWidth() / 2 
+				and it->getPositionVector().getX() < arena->getArenaWidth() / 2 
+				and it->getPositionVector().getY() < arena->getArenaHeight() / 2
+				and it->getPositionVector().getY() > -arena->getArenaHeight() / 2) {
+				it->setAppearedTrue();
+			}
+		}
 	}
 }
 
@@ -163,6 +159,9 @@ void fire_bullet() {
 
 	// check if bullet is outside arena bounds
 	checkBulletBounds();
+
+	// check if an asteroid needs to be erased
+	// checkAsteroidBounds();
 	
 	/*
 	for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
@@ -187,7 +186,24 @@ void fire_bullet() {
 	*/
 }
 
+void checkAsteroidSpawn() {
+	if (asteroidSpawnRateCounter >= maxAsteroidRate) {
+		// Make Asteroid
+		Asteroid* newAsteroid = new Asteroid();
+		// set spawn radius
+		newAsteroid->setSpawnRadius(width, height);
+		// Generate spawn position for new asteroid
+		newAsteroid->generateSpawnPoint();
+		// Calc direction of asteroid
+		*playerPosition = player->getPositionVector();
+		newAsteroid->asteroidDirection(playerPosition);
+		// Add new Asteroid to asteroids vector
+		asteroids->push_back(*newAsteroid);
 
+		// Set asteroid counter back to zero
+		asteroidSpawnRateCounter = 0;
+	}
+}
 
 void on_mouse_button(int button, int state, int x, int y)
 {

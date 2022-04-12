@@ -26,7 +26,7 @@ void Player::display() {
 	glColor3f(1.0, 1.0, 1.0);
 	glTranslatef(positionVector->getX(), positionVector->getY(), 0.0f);
 	glRotatef(angle, 0.0f, 0.0f, 1.0f);
-	glScalef(1.7f, 1.7f, 1.7f);
+	glScalef(1.75f, 1.75f, 1.75f);
 
 	glBegin(GL_TRIANGLES);
 	// Front of ship
@@ -43,6 +43,23 @@ void Player::display() {
 	glVertex3f(-10, -10, 0.0);
 	glVertex3f(0, -8, 0.0);
 	glVertex3f(0, 0, 0.0);
+
+	glColor3f(0.5, 0.75, 1.0);
+	// Gun
+	// Left side of gun
+	glVertex3f(5, 4, 0.0);
+	glVertex3f(10, 2, 0.0);
+	glVertex3f(10, 0, 0.0);
+
+	// Right side of gun
+	glVertex3f(5, -4, 0.0);
+	glVertex3f(10, -2, 0.0);
+	glVertex3f(10, 0, 0.0);
+
+	// Tip of gun
+	glVertex3f(10, 2, 0.0);
+	glVertex3f(13, 0, 0.0);
+	glVertex3f(10, -2, 0.0);
 
 	glEnd();
 	
@@ -63,8 +80,20 @@ void Player::display() {
 	glVertex3f(0, -8, 0.0);
 	glVertex3f(-10, -10, 0.0);
 	glVertex3f(0, 0, 0.0);
-
 	glEnd();
+
+	// make outline gun
+	glLineWidth(2.0);
+	glBegin(GL_LINE_LOOP);
+	glColor3f(0.4, 0.6, 0.8);
+	glVertex3f(5, 4, 0.0);
+	glVertex3f(10, 2, 0.0);
+	glVertex3f(13, 0, 0.0);
+	glVertex3f(10, -2, 0.0);
+	glVertex3f(5, -4, 0.0);
+	glVertex3f(10, 0, 0.0);
+	glEnd();
+
 	glPopMatrix();
 }
 
@@ -128,7 +157,7 @@ void Player::resetPlayer() {
 }
 
 void Player::multiplyDirectionVector() {
-	*mulitpliedDirectionVector = math->multiplyVector(directionVector, 15);
+	*mulitpliedDirectionVector = math->multiplyVector(directionVector, 23);
 }
 
 Vector Player::getMultipliedDirectionVector() {

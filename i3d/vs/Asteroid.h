@@ -23,6 +23,11 @@ public:
 
 	float generateMovementSpeed();
 
+	bool getAppeared();
+	void setAppearedTrue();
+
+	Vector getPositionVector();
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;
@@ -31,9 +36,9 @@ private:
 	float dt;
 	float angle;
 	Math* math;
-	// radius is from center to corner of screen
 	float spawnRadius;
 	float maxAsteroidRadius;
+	bool appeared;
 };
 
 #endif
