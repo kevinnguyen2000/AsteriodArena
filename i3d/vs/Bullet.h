@@ -9,7 +9,7 @@ class Bullet {
 public:
 	Bullet();
 
-	void display(std::vector<Bullet> bullets);
+	void display(std::vector<Bullet*> bullets);
 
 	void setDt(float dt);
 

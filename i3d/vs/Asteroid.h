@@ -13,7 +13,7 @@ public:
 
 	void generateSpawnPoint();
 
-	void display(std::vector<Asteroid> asteroids);
+	void display(std::vector<Asteroid*> asteroids);
 
 	void asteroidDirection(Vector* playerVector);
 
@@ -28,7 +28,7 @@ public:
 
 	Vector getPositionVector();
 
-	bool checkBulletCollision(Vector bullet);
+	bool checkBulletCollision(float bulletX, float bulletY);
 
 private:
 	Vector* radiusVector;

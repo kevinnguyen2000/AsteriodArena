@@ -6,7 +6,7 @@ Asteroid::Asteroid() {
 	this->radiusVector = new Vector();
 	this->math = new Math();
 	this->spawnRadius = 0;
-	this->maxAsteroidRadius = 50;
+	this->maxAsteroidRadius = 30;
 	this->angle = 0;
 	this->dt = 0;
 	this->movementSpeed = generateMovementSpeed();
@@ -53,8 +53,8 @@ void Asteroid::generateSpawnPoint() {
 	// printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
 }
 
-void Asteroid::display(std::vector<Asteroid> asteroids) {
-	for (Asteroid asteroid : asteroids) {
+void Asteroid::display(std::vector<Asteroid*> asteroids) {
+	for (Asteroid* asteroid : asteroids) {
 
 		glPushMatrix();
 		glLoadIdentity();
@@ -62,7 +62,7 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 		// tester
 		// printf("Asteroid pos: %f %f\n", asteroid.positionVector->getX(), asteroid.positionVector->getY());
 		glColor3f(0.5, 0.5, 0.5);
-		glTranslatef(asteroid.positionVector->getX(), asteroid.positionVector->getY(), 0.0f);
+		glTranslatef(asteroid->positionVector->getX(), asteroid->positionVector->getY(), 0.0f);
 		glRotatef(angle, 0.0f, 0.0f, 1.0f);
 		glScalef(5.0f, 5.0f, 5.0f);
 
@@ -136,7 +136,7 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 
 		glPopMatrix();
 
-		asteroidMovement(asteroid);
+		asteroidMovement(*asteroid);
 	}
 }
 
@@ -183,9 +183,10 @@ Vector Asteroid::getPositionVector() {
 	return *positionVector;
 }
 
-bool Asteroid::checkBulletCollision(Vector bullet) {
-	float distance = sqrt((positionVector->getX()-bullet.getX()) * (positionVector->getX() - bullet.getX()) + (positionVector->getY() - bullet.getY()) * (positionVector->getY() - bullet.getY()));
-	if (asteroidRadius <= distance) {
+bool Asteroid::checkBulletCollision(float bulletX, float bulletY) {
+	float distance = sqrt((positionVector->getX() - bulletX) * (positionVector->getX() - bulletX) + (positionVector->getY() - bulletY) * (positionVector->getY() - bulletY));
+	printf("distance: %f\n", distance);
+	if (maxAsteroidRadius >= distance) {
 		return true;
 	}
 	else {

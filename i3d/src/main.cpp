@@ -16,7 +16,7 @@ Vector* playerPosition = new Vector();
 Vector* playerDirection = new Vector();
 
 // Vector of bullets
-std::vector<Bullet>* bullets = new std::vector<Bullet>;
+std::vector<Bullet*> bullets;
 Bullet* bullet = new Bullet();
 
 float g_last_time = 0.0;
@@ -25,7 +25,7 @@ float maxShipFireRate = 0.6;
 float shipFireRateCounter = 0;
 
 // Vector of asteriods
-std::vector<Asteroid>* asteroids = new std::vector<Asteroid>;
+std::vector<Asteroid*> asteroids;
 Asteroid* asteroid = new Asteroid();
 
 float maxAsteroidRate = 4;
@@ -46,9 +46,9 @@ void reset_game() {
 	// Set player position back to starting state
 	player->resetPlayer();
 	// clears all bullets on screen
-	bullets->clear();
+	bullets.clear();
 	// clears all asteroids on screen
-	asteroids->clear();
+	asteroids.clear();
 }
 
 void display()
@@ -60,11 +60,11 @@ void display()
 
 	arena->display();
 	player->display();
-	if (bullets->size() > 0) {
-		bullet->display(*bullets);
+	if (bullets.size() > 0) {
+		bullet->display(bullets);
 	}
-	if (asteroids->size() > 0) {
-		asteroid->display(*asteroids);
+	if (asteroids.size() > 0) {
+		asteroid->display(asteroids);
 	}
 		
 	int err;
@@ -120,43 +120,53 @@ void on_key_release(unsigned char key, int x, int y) {
 }
 
 void checkAsteroidBounds() {
-	auto it = asteroids->begin();
-	while (it != asteroids->end()) {
-		// check if asteroid has entered arena, if so set appeared to true
-		if (it->getAppeared() == false) {
-			if (it->getPositionVector().getX() > -arena->getArenaWidth() / 2 
-				and it->getPositionVector().getX() < arena->getArenaWidth() / 2 
-				and it->getPositionVector().getY() < arena->getArenaHeight() / 2
-				and it->getPositionVector().getY() > -arena->getArenaHeight() / 2) {
-				it->setAppearedTrue();
-			}
-		}
-	}
 }
 
 void checkBulletBounds() {
-	auto it = bullets->begin();
-	while (it != bullets->end()) {
+	for (int i = 0; i < bullets.size();) {
+		if (bullets[i]->getPositionVector().getX() < -arena->getArenaWidth() / 2) {
+			bullets.erase(bullets.begin() + i);
+		}
+		// checks top wall
+		if (bullets[i]->getPositionVector().getY() > arena->getArenaHeight() / 2) {
+			bullets.erase(bullets.begin() + i);
+		}
+		// checks right wall
+		if (bullets[i]->getPositionVector().getX() > arena->getArenaWidth() / 2) {
+			bullets.erase(bullets.begin() + i);
+		}
+		// checks bottom wall
+		if (bullets[i]->getPositionVector().getY() < -arena->getArenaHeight() / 2) {
+			bullets.erase(bullets.begin() + i);
+		}
+		else {
+			i++;
+		}
+	}
+	/*
+	auto it = bullets.begin();
+	while (it != bullets.end()) {
 		// checks left wall
 		if (it->getPositionVector().getX() < -arena->getArenaWidth() / 2) {
-			it = bullets->erase(it);
+			it = bullets.erase(it);
 		}
 		// checks top wall
 		if (it->getPositionVector().getY() > arena->getArenaHeight() /2) {
-			it = bullets->erase(it);
+			it = bullets.erase(it);
 		}
 		// checks right wall
 		if (it->getPositionVector().getX() > arena->getArenaWidth() / 2) {
-			it = bullets->erase(it);
+			it = bullets.erase(it);
 		}
 		// checks bottom wall
 		if (it->getPositionVector().getY() < -arena->getArenaHeight() / 2) {
-			it = bullets->erase(it);
+			it = bullets.erase(it);
 		}
 		else {
 			it++;
 		}
 	}
+	*/
 }
 
 void fire_bullet() {
@@ -170,7 +180,7 @@ void fire_bullet() {
 	newBullet->setDirectionVector(player->getDirectionVector().getX(), player->getDirectionVector().getY());
 
 	// add Bullet to bullet array
-	bullets->push_back(*newBullet);
+	bullets.push_back(newBullet);
 
 	// Set counter back to zero
 	shipFireRateCounter = 0;
@@ -179,10 +189,10 @@ void fire_bullet() {
 	checkBulletBounds();
 
 	// check if an asteroid needs to be erased
-	// checkAsteroidBounds();
+	checkAsteroidBounds();
 	
 	/*
-	for (auto bullet = std::begin(*bullets); bullet != std::end(*bullets); ++bullet) {
+	for (auto bullet = std::begin(bullets); bullet != std::end(bullets); ++bullet) {
 		printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
 	}
 	printf("\n");
@@ -216,7 +226,7 @@ void checkAsteroidSpawn() {
 		*playerPosition = player->getPositionVector();
 		newAsteroid->asteroidDirection(playerPosition);
 		// Add new Asteroid to asteroids vector
-		asteroids->push_back(*newAsteroid);
+		asteroids.push_back(newAsteroid);
 
 		// Set asteroid counter back to zero
 		asteroidSpawnRateCounter = 0;
@@ -225,15 +235,15 @@ void checkAsteroidSpawn() {
 
 void checkBulletAsteroidCollision() {
 	// loop through all bullets and asteroids
-	/*
-	auto asteroid = asteroids->begin();
-	while (asteroid != asteroids->end()) {
-		auto bullet = bullets->begin();
-		while (bullet != bullets->end()) {
-			
+	
+	for (int i = 0; i < asteroids.size(); i++) {
+		for (int j = 0; j < bullets.size(); j++) {
+			if (asteroids[i]->checkBulletCollision(bullets[j]->getPositionVector().getX(), bullets[j]->getPositionVector().getY()) == true) {
+				printf("COLLOSION");
+				asteroids.clear();
+			}
 		}
 	}
-	*/
 }
 
 void on_mouse_button(int button, int state, int x, int y)
@@ -285,7 +295,7 @@ void update_game_state(float dt) {
 	checkAsteroidSpawn();
 
 	// check bullet collision with asteroids
-	if (bullets->size() > 0 and asteroids->size() > 0) {
+	if (bullets.size() > 0 and asteroids.size() > 0) {
 		checkBulletAsteroidCollision();
 	}
 }

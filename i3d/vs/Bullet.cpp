@@ -9,8 +9,8 @@ Bullet::Bullet() {
 	this->math = new Math();
 }
 
-void Bullet::display(std::vector<Bullet> bullets) {
-	for (Bullet bullet : bullets) {
+void Bullet::display(std::vector<Bullet*> bullets) {
+	for (Bullet* bullet : bullets) {
 
 		glPushMatrix();
 		glLoadIdentity();
@@ -19,8 +19,8 @@ void Bullet::display(std::vector<Bullet> bullets) {
 
 		glColor3f(1.0, 1.0, 1.0);
 		glPointSize(2.0);
-		glTranslatef(bullet.positionVector->getX(), bullet.positionVector->getY(), 0.0f);
-		glRotatef(bullet.angle, 0.0f, 0.0f, 1.0f);
+		glTranslatef(bullet->positionVector->getX(), bullet->positionVector->getY(), 0.0f);
+		glRotatef(bullet->angle, 0.0f, 0.0f, 1.0f);
 		glScalef(0.0f, 0.0f, 0.0f);
 
 		glBegin(GL_POINTS);
@@ -28,7 +28,7 @@ void Bullet::display(std::vector<Bullet> bullets) {
 		glEnd();
 		glPopMatrix();
 
-		bulletDirection(bullet);
+		bulletDirection(*bullet);
 	}
 }
 
