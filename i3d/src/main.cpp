@@ -43,6 +43,8 @@ void reset_game() {
 	player->resetPlayer();
 	// clears all bullets on screen
 	bullets->clear();
+	// clears all asteroids on screen
+	asteroids->clear();
 }
 
 void display()

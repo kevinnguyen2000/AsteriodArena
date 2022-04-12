@@ -114,6 +114,20 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 		glVertex3f(0, -10, 0.0);
 		glEnd();
 
+		// make outline of spaceship
+		glLineWidth(5.0);
+		glBegin(GL_LINE_LOOP);
+		glColor3f(0.3, 0.15, 0.1);
+		glVertex3f(0, 10, 0.0);
+		glVertex3f(7, 7, 0.0);
+		glVertex3f(10, 0, 0.0);
+		glVertex3f(7, -7, 0.0);
+		glVertex3f(0, -10, 0.0);
+		glVertex3f(-7, -7, 0.0);
+		glVertex3f(-10, 0, 0.0);
+		glVertex3f(-7, 7, 0.0);
+		glEnd();
+
 		glPopMatrix();
 
 		asteroidMovement(asteroid);
