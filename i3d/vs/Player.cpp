@@ -99,7 +99,7 @@ void Player::display() {
 
 void Player::moveFoward() {
 	// Set movement speed to 2500
-	this->movementSpeed = 2500;
+	this->movementSpeed = 75;
 
 	Vector* newCoords = new Vector();
 	newCoords->setX(positionVector->getX() + directionVector->getX() * movementSpeed * dt);

@@ -28,6 +28,8 @@ public:
 
 	Vector getPositionVector();
 
+	bool checkBulletCollision(Vector bullet);
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;
@@ -39,6 +41,7 @@ private:
 	float spawnRadius;
 	float maxAsteroidRadius;
 	bool appeared;
+	float asteroidRadius;
 };
 
 #endif

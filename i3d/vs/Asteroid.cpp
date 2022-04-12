@@ -12,6 +12,7 @@ Asteroid::Asteroid() {
 	this->movementSpeed = generateMovementSpeed();
 	// printf("Movement speed: %f\n", movementSpeed);
 	this->appeared = false;
+	this->asteroidRadius = 50;
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -180,4 +181,14 @@ bool Asteroid::getAppeared() {
 
 Vector Asteroid::getPositionVector() {
 	return *positionVector;
+}
+
+bool Asteroid::checkBulletCollision(Vector bullet) {
+	float distance = sqrt((positionVector->getX()-bullet.getX()) * (positionVector->getX() - bullet.getX()) + (positionVector->getY() - bullet.getY()) * (positionVector->getY() - bullet.getY()));
+	if (asteroidRadius <= distance) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

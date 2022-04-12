@@ -11,6 +11,9 @@
 #include <random>
 
 #define m1 0
+#define a_key 1
+#define w_key 2
+#define d_key 3
 
 #if _WIN32
 #   include <Windows.h>

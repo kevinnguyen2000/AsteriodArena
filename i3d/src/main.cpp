@@ -35,7 +35,7 @@ float width, height = 0;
 
 // Vector for key states
 std::vector<bool> keys;
-int keysNum = 1;
+int keysNum = 4;
 
 // Math helper
 Math* math = new Math();
@@ -85,14 +85,28 @@ void keyboard(unsigned char key, int x, int y)
 		exit(EXIT_SUCCESS);
 		break;
 	case 'w':
-		player->moveFoward();
-		// Check wall collision
-		*playerPosition = player->getPositionVector();
-		arena->setCircleWorldPositionVector(playerPosition);
-		arena->checkWallCollision();
-		if (arena->getCollision() == true) {
-			reset_game();
-		}
+		keys[w_key] = true;
+		break;
+	case 'a':
+		player->rotateLeft();
+		break;
+	case 'd':
+		player->rotateRight();
+		break;
+	default:
+		break;
+	}
+}
+
+void on_key_release(unsigned char key, int x, int y) {
+	switch (key)
+	{
+	case 27:
+	case 'q':
+		exit(EXIT_SUCCESS);
+		break;
+	case 'w':
+		keys[w_key] = false;
 		break;
 	case 'a':
 		player->rotateLeft();
@@ -209,29 +223,43 @@ void checkAsteroidSpawn() {
 	}
 }
 
+void checkBulletAsteroidCollision() {
+	// loop through all bullets and asteroids
+	/*
+	auto asteroid = asteroids->begin();
+	while (asteroid != asteroids->end()) {
+		auto bullet = bullets->begin();
+		while (bullet != bullets->end()) {
+			
+		}
+	}
+	*/
+}
+
 void on_mouse_button(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		keys[m1] = true;
-		/*
-		if (shipFireRateCounter >= maxShipFireRate) {
-			fire_bullet();
-		}
-		*/
 	}
 	else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
 		keys[m1] = false;
 	}
 }
 
-void on_key_release(unsigned char key, int x, int y)
-{
-}
-
 void checkKeyStates() {
 	if (keys[m1] == true) {
 		if (shipFireRateCounter >= maxShipFireRate) {
 			fire_bullet();
+		}
+	}
+	if (keys[w_key] == true) {
+		player->moveFoward();
+		// Check wall collision
+		*playerPosition = player->getPositionVector();
+		arena->setCircleWorldPositionVector(playerPosition);
+		arena->checkWallCollision();
+		if (arena->getCollision() == true) {
+			reset_game();
 		}
 	}
 }
@@ -245,6 +273,11 @@ void update_game_state(float dt) {
 	asteroid->setDt(dt);
 
 	checkAsteroidSpawn();
+
+	// check bullet collision with asteroids
+	if (bullets->size() > 0 and asteroids->size() > 0) {
+		checkBulletAsteroidCollision();
+	}
 }
 
 // function for calculating dt , from lec 2
@@ -305,7 +338,6 @@ void init(int* argcp, char** argv)
 	glutKeyboardUpFunc(on_key_release);
 	glutMouseFunc(on_mouse_button);
 	
-
 	// init vector keys
 	for (int i = 0; i < keysNum; i++) {
 		keys.push_back(false);
