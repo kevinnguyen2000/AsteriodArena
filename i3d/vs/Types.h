@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <cmath>
+#include <random>
 
 #if _WIN32
 #   include <Windows.h>

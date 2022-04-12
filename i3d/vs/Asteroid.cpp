@@ -9,7 +9,8 @@ Asteroid::Asteroid() {
 	this->maxAsteroidRadius = 50;
 	this->angle = 0;
 	this->dt = 0;
-	this->movementSpeed = 150;
+	this->movementSpeed = generateMovementSpeed();
+	printf("Movement speed: %f\n", movementSpeed);
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -20,19 +21,22 @@ void Asteroid::setSpawnRadius(float x, float y) {
 	spawnRadius = math->findVectorLength(radiusVector) + maxAsteroidRadius;
 	// spawnRadius = 300;
 	// printf("Spawn radius: %f \n", spawnRadius);
-
 }
 
 void Asteroid::generateSpawnPoint() {
+
 	// Use radius vector to set min max for x coord number generation
 	int maxRandNumber = ceil (spawnRadius * 2);
 	int randMinus = spawnRadius;
 	// printf("MaxRandNumber: %d\n", maxRandNumber);
 
 	// Generate random x coord 
-	srand((unsigned int)time(NULL));
-	int asteroidXCoord = rand() % maxRandNumber;
-	asteroidXCoord = asteroidXCoord - randMinus;
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_int_distribution<std::mt19937::result_type> xRange(0, maxRandNumber);
+	int asteroidXCoord = float (xRange(rng));
+
+	asteroidXCoord = asteroidXCoord - spawnRadius;
 	
 	// helper method
 	//int asteroidXCoord = spawnRadius;
@@ -131,6 +135,7 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 		glPopMatrix();
 
 		asteroidMovement(asteroid);
+		
 	}
 }
 
@@ -144,6 +149,7 @@ void Asteroid::asteroidDirection(Vector* playerVector) {
 }
 
 void Asteroid::asteroidMovement(Asteroid asteroid) {
+
 	Vector* newCoords = new Vector();
 	newCoords->setX(asteroid.positionVector->getX() + asteroid.directionVector->getX() * movementSpeed * dt);
 	newCoords->setY(asteroid.positionVector->getY() + asteroid.directionVector->getY() * movementSpeed * dt);
@@ -154,4 +160,12 @@ void Asteroid::asteroidMovement(Asteroid asteroid) {
 
 void Asteroid::setDt(float dt) {
 	this->dt = dt;
+}
+
+float Asteroid::generateMovementSpeed() {
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_int_distribution<std::mt19937::result_type> movementRange(125, 225); 
+
+	return float (movementRange(rng));
 }

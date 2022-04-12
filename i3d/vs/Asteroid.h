@@ -21,6 +21,8 @@ public:
 
 	void setDt(float dt);
 
+	float generateMovementSpeed();
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;

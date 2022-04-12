@@ -26,7 +26,7 @@ void Player::display() {
 	glColor3f(1.0, 1.0, 1.0);
 	glTranslatef(positionVector->getX(), positionVector->getY(), 0.0f);
 	glRotatef(angle, 0.0f, 0.0f, 1.0f);
-	glScalef(1.5f, 1.5f, 1.5f);
+	glScalef(1.7f, 1.7f, 1.7f);
 
 	glBegin(GL_TRIANGLES);
 	// Front of ship
