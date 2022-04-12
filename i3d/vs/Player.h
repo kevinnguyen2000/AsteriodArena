@@ -28,13 +28,17 @@ public:
 
 	Vector getPositionVector();
 	Vector getDirectionVector();
+	Vector getMultipliedDirectionVector();
 
 	// Reset player position
 	void resetPlayer();
 
+	void multiplyDirectionVector();
+
 	// private class variables
 private:
 	Vector* directionVector;
+	Vector* mulitpliedDirectionVector;
 	Vector* positionVector;
 	float angle;
 	float movementSpeed;

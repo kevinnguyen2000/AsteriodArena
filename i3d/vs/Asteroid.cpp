@@ -9,7 +9,7 @@ Asteroid::Asteroid() {
 	this->maxAsteroidRadius = 50;
 	this->angle = 0;
 	this->dt = 0;
-	this->movementSpeed = 0;
+	this->movementSpeed = 150;
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -18,7 +18,8 @@ void Asteroid::setSpawnRadius(float x, float y) {
 	radiusVector->setX(x/2);
 	radiusVector->setY(y/2);
 	spawnRadius = math->findVectorLength(radiusVector) + maxAsteroidRadius;
-	printf("Spawn radius: %f \n", spawnRadius);
+	// spawnRadius = 300;
+	// printf("Spawn radius: %f \n", spawnRadius);
 
 }
 
@@ -26,7 +27,7 @@ void Asteroid::generateSpawnPoint() {
 	// Use radius vector to set min max for x coord number generation
 	int maxRandNumber = ceil (spawnRadius * 2);
 	int randMinus = spawnRadius;
-	printf("MaxRandNumber: %d\n", maxRandNumber);
+	// printf("MaxRandNumber: %d\n", maxRandNumber);
 
 	// Generate random x coord 
 	srand((unsigned int)time(NULL));
@@ -43,7 +44,7 @@ void Asteroid::generateSpawnPoint() {
 	positionVector->setX(asteroidXCoord);
 	positionVector->setY(asteroidYCoord);
 
-	printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
+	// printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
 }
 
 void Asteroid::display(std::vector<Asteroid> asteroids) {
@@ -114,11 +115,29 @@ void Asteroid::display(std::vector<Asteroid> asteroids) {
 		glEnd();
 
 		glPopMatrix();
+
+		asteroidMovement(asteroid);
 	}
 }
 
 void Asteroid::asteroidDirection(Vector* playerVector) {
 	*directionVector = math->subtractVector(playerVector, positionVector);
 	// tester
-	printf("Asteroid direction vector: %f %f", directionVector->getX(), directionVector->getY());
+	// printf("Asteroid direction vector: %f %f", directionVector->getX(), directionVector->getY());
+	float a = math->directionVectorToDegree(directionVector);
+	*directionVector = math->degreeToDirectionVector(a);
+	// printf("Asteroid direction vector: %f %f", directionVector->getX(), directionVector->getY());
+}
+
+void Asteroid::asteroidMovement(Asteroid asteroid) {
+	Vector* newCoords = new Vector();
+	newCoords->setX(asteroid.positionVector->getX() + asteroid.directionVector->getX() * movementSpeed * dt);
+	newCoords->setY(asteroid.positionVector->getY() + asteroid.directionVector->getY() * movementSpeed * dt);
+
+	asteroid.positionVector->setX(newCoords->getX());
+	asteroid.positionVector->setY(newCoords->getY());
+}
+
+void Asteroid::setDt(float dt) {
+	this->dt = dt;
 }

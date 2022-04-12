@@ -12,6 +12,7 @@ Player::Player() {
 	// Vector for angle
 	this->directionVector = new Vector();
 	*directionVector = math->degreeToDirectionVector(angle);
+	this->mulitpliedDirectionVector = new Vector();
 }
 
 Player::~Player() {
@@ -124,5 +125,13 @@ void Player::resetPlayer() {
 	positionVector->setX(0);
 	positionVector->setY(0);
 	*directionVector = math->degreeToDirectionVector(angle);
+}
+
+void Player::multiplyDirectionVector() {
+	*mulitpliedDirectionVector = math->multiplyVector(directionVector, 15);
+}
+
+Vector Player::getMultipliedDirectionVector() {
+	return *mulitpliedDirectionVector;
 }
 

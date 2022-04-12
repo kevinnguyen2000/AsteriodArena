@@ -17,6 +17,10 @@ public:
 
 	void asteroidDirection(Vector* playerVector);
 
+	void asteroidMovement(Asteroid asteroid);
+
+	void setDt(float dt);
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;

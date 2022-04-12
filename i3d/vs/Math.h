@@ -23,6 +23,8 @@ public:
 
 	int calculateYFromX(int x, float radius);
 
+	float directionVectorToDegree(Vector* a);
+
 	// private class variables
 	private:
 		float PI = 3.14159265359;

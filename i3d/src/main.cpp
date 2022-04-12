@@ -33,6 +33,9 @@ float asteroidSpawnRateCounter = 0;
 
 float width, height = 0;
 
+// Math helper
+Math* math = new Math();
+
 void reset_game() {
 	// Set collision back to false
 	arena->setCollisionFalse();
@@ -144,8 +147,10 @@ void fire_bullet() {
 	// Make new bullet on left click press
 	Bullet* newBullet = new Bullet();
 
-	// Set in normal variables
-	newBullet->setBulletPositionVector(player->getPositionVector().getX(), player->getPositionVector().getY());
+	player->multiplyDirectionVector();
+
+	// Set in normal variables, add positon and direction vector to make bullet spawn at tip
+	newBullet->setBulletPositionVector(player->getPositionVector().getX() + player->getMultipliedDirectionVector().getX(), player->getPositionVector().getY() + player->getMultipliedDirectionVector().getY());
 	newBullet->setDirectionVector(player->getDirectionVector().getX(), player->getDirectionVector().getY());
 
 	// add Bullet to bullet array
@@ -194,6 +199,7 @@ void on_mouse_button(int button, int state, int x, int y)
 void update_game_state(float dt) {
 	player->setDt(dt);
 	bullet->setDt(dt);
+	asteroid->setDt(dt);
 
 	checkAsteroidSpawn();
 }

@@ -66,10 +66,15 @@ int Math::calculateYFromX(int x, float radius) {
 	// Generate either minus or positive y Coord
 	srand(time(0));
 	int sign = rand() % 2;
-	printf("sign: %d\n", sign);
+	// printf("sign: %d\n", sign);
 	if (sign == 0) {
 		yCoord = -yCoord;
 	}
 	//printf("YCoord: %d", yCoord);
 	return yCoord;
+}
+
+float Math::directionVectorToDegree(Vector* a) {
+	float angle = atan2(a->getY(), a->getX()) * 180/PI;
+	return angle;
 }
