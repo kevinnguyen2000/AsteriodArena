@@ -21,7 +21,7 @@ Bullet* bullet = new Bullet();
 
 float g_last_time = 0.0;
 
-float maxShipFireRate = 0.25;
+float maxShipFireRate = 0.6;
 float shipFireRateCounter = 0;
 
 // Vector of asteriods
@@ -32,6 +32,10 @@ float maxAsteroidRate = 4;
 float asteroidSpawnRateCounter = 0;
 
 float width, height = 0;
+
+// Vector for key states
+std::vector<bool> keys;
+int keysNum = 1;
 
 // Math helper
 Math* math = new Math();
@@ -208,6 +212,24 @@ void checkAsteroidSpawn() {
 void on_mouse_button(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		keys[m1] = true;
+		/*
+		if (shipFireRateCounter >= maxShipFireRate) {
+			fire_bullet();
+		}
+		*/
+	}
+	else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
+		keys[m1] = false;
+	}
+}
+
+void on_key_release(unsigned char key, int x, int y)
+{
+}
+
+void checkKeyStates() {
+	if (keys[m1] == true) {
 		if (shipFireRateCounter >= maxShipFireRate) {
 			fire_bullet();
 		}
@@ -215,6 +237,9 @@ void on_mouse_button(int button, int state, int x, int y)
 }
 
 void update_game_state(float dt) {
+
+	checkKeyStates();
+
 	player->setDt(dt);
 	bullet->setDt(dt);
 	asteroid->setDt(dt);
@@ -277,7 +302,14 @@ void init(int* argcp, char** argv)
 
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
+	glutKeyboardUpFunc(on_key_release);
 	glutMouseFunc(on_mouse_button);
+	
+
+	// init vector keys
+	for (int i = 0; i < keysNum; i++) {
+		keys.push_back(false);
+	}
 
 	// idle function
 	glutIdleFunc(on_idle);

@@ -10,6 +10,8 @@
 #include <cmath>
 #include <random>
 
+#define m1 0
+
 #if _WIN32
 #   include <Windows.h>
 #endif
