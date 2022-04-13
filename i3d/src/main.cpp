@@ -28,7 +28,7 @@ float shipFireRateCounter = 0;
 std::vector<Asteroid*> asteroids;
 Asteroid* asteroid = new Asteroid();
 
-float maxAsteroidRate = 12;
+float maxAsteroidRate = 10;
 float asteroidSpawnRateCounter = 0;
 
 float width, height = 0;

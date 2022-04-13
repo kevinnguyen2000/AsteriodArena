@@ -185,8 +185,10 @@ Vector Asteroid::getPositionVector() {
 }
 
 bool Asteroid::checkCollision(float xCoord, float yCoord, float radius) {
-	float distance = sqrt((positionVector->getX() - xCoord * (positionVector->getX() - xCoord) + (positionVector->getY() - yCoord) * (positionVector->getY() - yCoord)));
-	// printf("distance: %f\n", distance);
+	float distance = sqrt(((positionVector->getX() - xCoord) * (positionVector->getX() - xCoord) + (positionVector->getY() - yCoord) * (positionVector->getY() - yCoord)));
+	//printf("Asteroid position: (%f) (%f)\n", positionVector->getX(), positionVector->getY());
+	//printf("Bullet position: (%f) (%f)\n", xCoord, yCoord);
+	//printf("distance: %f\n", distance);
 	if (maxAsteroidRadius + radius >= distance) {
 		return true;
 	}
