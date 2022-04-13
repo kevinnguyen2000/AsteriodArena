@@ -28,7 +28,7 @@ float shipFireRateCounter = 0;
 std::vector<Asteroid*> asteroids;
 Asteroid* asteroid = new Asteroid();
 
-float maxAsteroidRate = 10;
+float maxAsteroidRate = 13;
 float asteroidSpawnRateCounter = 0;
 
 float width, height = 0;
@@ -129,18 +129,26 @@ void checkAsteroidBounds() {
 void checkBulletBounds() {
 	for (int i = 0; i < bullets.size();) {
 		if (bullets[i]->getPositionVector().getX() < -arena->getArenaWidth() / 2) {
+			delete bullets[i];
+			bullets[i] = nullptr;
 			bullets.erase(bullets.begin() + i);
 		}
 		// checks top wall
 		if (bullets[i]->getPositionVector().getY() > arena->getArenaHeight() / 2) {
+			delete bullets[i];
+			bullets[i] = nullptr;
 			bullets.erase(bullets.begin() + i);
 		}
 		// checks right wall
 		if (bullets[i]->getPositionVector().getX() > arena->getArenaWidth() / 2) {
+			delete bullets[i];
+			bullets[i] = nullptr;
 			bullets.erase(bullets.begin() + i);
 		}
 		// checks bottom wall
 		if (bullets[i]->getPositionVector().getY() < -arena->getArenaHeight() / 2) {
+			delete bullets[i];
+			bullets[i] = nullptr;
 			bullets.erase(bullets.begin() + i);
 		}
 		else {
@@ -248,11 +256,16 @@ void checkAsteroidSpawn() {
 
 void checkBulletAsteroidCollision() {
 	// loop through all bullets and asteroids
+	// BUG -- somestimes crashes game, fix for loops
 	for (int i = 0; i < asteroids.size(); ++i) {
 		for (int j = 0; j < bullets.size(); ++j) {
 			// check bullet collision with asteroids, if collides destory both asteroid and bullet
 			if (asteroids[i]->checkCollision(bullets[j]->getPositionVector().getX(), bullets[j]->getPositionVector().getY(), 1) == true) {
+				delete asteroids[i];
+				asteroids[i] = nullptr;
 				asteroids.erase(asteroids.begin() + i);
+				delete bullets[j];
+				bullets[j] = nullptr;
 				bullets.erase(bullets.begin() + j);
 			}
 		}

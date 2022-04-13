@@ -7,6 +7,7 @@ Asteroid::Asteroid() {
 	this->math = new Math();
 	this->spawnRadius = 0;
 	this->maxAsteroidRadius = 0;
+	this->asteriodRadius = 0;
 	this->angle = 0;
 	this->dt = 0;
 	this->movementSpeed = generateMovementSpeed();
@@ -14,7 +15,7 @@ Asteroid::Asteroid() {
 	this->asteroidScale = 5;
 	this->maxVertexLength = 0;
 	this->minVertexLength = 0;
-	generateAsteroidSize();
+	generateAsteroidShape();
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -55,6 +56,7 @@ void Asteroid::generateSpawnPoint() {
 	// printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
 }
 
+/*
 void Asteroid::generateAsteroidSize() {
 	// Generate max size
 	std::random_device dev;
@@ -78,9 +80,46 @@ void Asteroid::generateAsteroidSize() {
 	// set max asteroid radius
 	maxAsteroidRadius = maxVertexLength * asteroidScale;
 }
+*/
 
 void Asteroid::generateAsteroidShape() {
-	
+	// Determine if small, medium or large asteroid
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_int_distribution<std::mt19937::result_type> sizeRange(0, 2);
+	int size = sizeRange(rng);
+	printf("size: %d", size);
+
+	for (int i = 0; i < 360; i += 15) {
+		if (size == 0) {
+			std::uniform_int_distribution<std::mt19937::result_type> sizeSmall(4, 6);
+			asteriodRadius = sizeSmall(rng);
+			Vector currentDirection = math->degreeToDirectionVector(i);
+			currentDirection.setX(currentDirection.getX() * asteriodRadius);
+			currentDirection.setY(currentDirection.getY() * asteriodRadius);
+			vertices.push_back(currentDirection);
+
+		}
+		if (size == 1) {
+			std::uniform_int_distribution<std::mt19937::result_type> sizeMedium(9, 11);
+			asteriodRadius = sizeMedium(rng);
+			Vector currentDirection = math->degreeToDirectionVector(i);
+			currentDirection.setX(currentDirection.getX() * asteriodRadius);
+			currentDirection.setY(currentDirection.getY() * asteriodRadius);
+			vertices.push_back(currentDirection);
+		}
+		if (size == 2) {
+			std::uniform_int_distribution<std::mt19937::result_type> sizeLarge(14, 16);
+			asteriodRadius = sizeLarge(rng);
+			Vector currentDirection = math->degreeToDirectionVector(i);
+			currentDirection.setX(currentDirection.getX() * asteriodRadius);
+			currentDirection.setY(currentDirection.getY() * asteriodRadius);
+			vertices.push_back(currentDirection);
+		}
+	}
+
+	// set max asteroid radius
+	maxAsteroidRadius = asteriodRadius * asteroidScale;
 }
 
 void Asteroid::display(std::vector<Asteroid*> asteroids) {
@@ -89,81 +128,27 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 		glPushMatrix();
 		glLoadIdentity();
 
-		// tester
-		// printf("Asteroid pos: %f %f\n", asteroid.positionVector->getX(), asteroid.positionVector->getY());
 		glColor3f(0.5, 0.5, 0.5);
 		glTranslatef(asteroid->positionVector->getX(), asteroid->positionVector->getY(), 0.0f);
 		glRotatef(angle, 0.0f, 0.0f, 1.0f);
 		glScalef(asteroid->asteroidScale, asteroidScale, asteroidScale);
 
-		glBegin(GL_TRIANGLES);
-		glVertex3f(0, asteroid->maxVertexLength, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glVertex3f(asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
+		glBegin(GL_POLYGON);
+		for (Vector vertex : asteroid->vertices) {
+			glVertex3f(vertex.getX(), vertex.getY(), 0.0);
+		}
+
 		glEnd();
 
-		glBegin(GL_TRIANGLES);
-		glVertex3f(0, -asteroid->maxVertexLength, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glVertex3f(-asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(-asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glVertex3f(0, asteroid->maxVertexLength, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(asteroid->maxVertexLength, 0, 0.0);
-		glVertex3f(asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(asteroid->maxVertexLength, 0, 0.0);
-		glVertex3f(asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(0, 0, 0.0);
-		glVertex3f(asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
-		glVertex3f(0, -asteroid->maxVertexLength, 0.0);
-		glEnd();
-
-		// make outline of spaceship
-		glLineWidth(5.0);
+		// make outline of asteroid
+		glLineWidth(2.0);
 		glBegin(GL_LINE_LOOP);
 		glColor3f(0.3, 0.15, 0.1);
-		glVertex3f(0, asteroid->maxVertexLength, 0.0);
-		glVertex3f(asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
-		glVertex3f(asteroid->maxVertexLength, 0, 0.0);
-		glVertex3f(asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
-		glVertex3f(0, -asteroid->maxVertexLength, 0.0);
-		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
-		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
-		glVertex3f(-asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
+		for (Vector vertex : asteroid->vertices) {
+			glVertex3f(vertex.getX(), vertex.getY(), 0.0);
+		}
+		
 		glEnd();
-
 		glPopMatrix();
 
 		asteroidMovement(*asteroid);
@@ -218,6 +203,7 @@ bool Asteroid::checkCollision(float xCoord, float yCoord, float radius) {
 	//printf("Asteroid position: (%f) (%f)\n", positionVector->getX(), positionVector->getY());
 	//printf("Bullet position: (%f) (%f)\n", xCoord, yCoord);
 	//printf("distance: %f\n", distance);
+	// printf("Max asteroid radius: %f", maxAsteroidRadius);
 	if (maxAsteroidRadius + radius >= distance) {
 		return true;
 	}

@@ -44,11 +44,12 @@ private:
 	Math* math;
 	float spawnRadius;
 	float maxAsteroidRadius;
+	float asteriodRadius;
 	bool appeared;
 	float asteroidScale;
 	float maxVertexLength;
 	float minVertexLength;
-	std::vector<float> vertices;
+	std::vector<Vector> vertices;
 };
 
 #endif
