@@ -28,7 +28,7 @@ public:
 
 	Vector getPositionVector();
 
-	bool checkCollision(float xCoord, float yCoord);
+	bool checkCollision(float xCoord, float yCoord, float radius);
 
 private:
 	Vector* radiusVector;
@@ -42,6 +42,8 @@ private:
 	float maxAsteroidRadius;
 	bool appeared;
 	float asteroidRadius;
+	float asteroidScale;
+	float maxVertexLength;
 };
 
 #endif

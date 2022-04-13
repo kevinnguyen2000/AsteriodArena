@@ -6,13 +6,14 @@ Asteroid::Asteroid() {
 	this->radiusVector = new Vector();
 	this->math = new Math();
 	this->spawnRadius = 0;
-	this->maxAsteroidRadius = 30;
+	this->maxAsteroidRadius = 50;
 	this->angle = 0;
 	this->dt = 0;
 	this->movementSpeed = generateMovementSpeed();
-	// printf("Movement speed: %f\n", movementSpeed);
 	this->appeared = false;
 	this->asteroidRadius = 70;
+	this->asteroidScale = 5;
+	this->maxVertexLength = 10;
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -64,34 +65,34 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 		glColor3f(0.5, 0.5, 0.5);
 		glTranslatef(asteroid->positionVector->getX(), asteroid->positionVector->getY(), 0.0f);
 		glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		glScalef(5.0f, 5.0f, 5.0f);
+		glScalef(asteroidScale, asteroidScale, asteroidScale);
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(0, 10, 0.0);
+		glVertex3f(0, maxVertexLength, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glVertex3f(7, 7, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(0, -10, 0.0);
+		glVertex3f(0, -maxVertexLength, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glVertex3f(-7, -7, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(-10, 0, 0.0);
+		glVertex3f(-maxVertexLength, 0, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glVertex3f(-7, -7, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(-10, 0, 0.0);
+		glVertex3f(-maxVertexLength, 0, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glVertex3f(-7, -7, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(-10, 0, 0.0);
+		glVertex3f(-maxVertexLength, 0, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glVertex3f(-7, 7, 0.0);
 		glEnd();
@@ -99,17 +100,17 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 		glBegin(GL_TRIANGLES);
 		glVertex3f(-7, 7, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(0, 10, 0.0);
+		glVertex3f(0, maxVertexLength, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(10, 0, 0.0);
+		glVertex3f(maxVertexLength, 0, 0.0);
 		glVertex3f(7, 7, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(10, 0, 0.0);
+		glVertex3f(maxVertexLength, 0, 0.0);
 		glVertex3f(7, -7, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glEnd();
@@ -117,7 +118,7 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 		glBegin(GL_TRIANGLES);
 		glVertex3f(0, 0, 0.0);
 		glVertex3f(7, -7, 0.0);
-		glVertex3f(0, -10, 0.0);
+		glVertex3f(0, -maxVertexLength, 0.0);
 		glEnd();
 
 		// make outline of spaceship
@@ -183,10 +184,10 @@ Vector Asteroid::getPositionVector() {
 	return *positionVector;
 }
 
-bool Asteroid::checkCollision(float xCoord, float yCoord) {
+bool Asteroid::checkCollision(float xCoord, float yCoord, float radius) {
 	float distance = sqrt((positionVector->getX() - xCoord * (positionVector->getX() - xCoord) + (positionVector->getY() - yCoord) * (positionVector->getY() - yCoord)));
 	// printf("distance: %f\n", distance);
-	if (maxAsteroidRadius >= distance) {
+	if (maxAsteroidRadius + radius >= distance) {
 		return true;
 	}
 	else {

@@ -14,6 +14,7 @@ Player::Player() {
 	*directionVector = math->degreeToDirectionVector(angle);
 	this->mulitpliedDirectionVector = new Vector();
 	this->maxSpeed = 120;
+	this->playerRadius = 15.0;
 }
 
 Player::~Player() {
@@ -184,5 +185,9 @@ void Player::multiplyDirectionVector() {
 
 Vector Player::getMultipliedDirectionVector() {
 	return *mulitpliedDirectionVector;
+}
+
+float Player::getPlayerRadius() {
+	return playerRadius;
 }
 

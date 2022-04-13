@@ -36,6 +36,8 @@ public:
 
 	void multiplyDirectionVector();
 
+	float getPlayerRadius();
+
 	// private class variables
 private:
 	Vector* directionVector;
@@ -46,6 +48,7 @@ private:
 	float dt;
 	Math* math;
 	float maxSpeed;
+	float playerRadius;
 };
 
 #endif
