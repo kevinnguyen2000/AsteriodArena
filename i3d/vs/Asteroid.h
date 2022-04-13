@@ -32,6 +32,8 @@ public:
 
 	void generateAsteroidSize();
 
+	void generateAsteroidShape();
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;
@@ -46,6 +48,7 @@ private:
 	float asteroidScale;
 	float maxVertexLength;
 	float minVertexLength;
+	std::vector<float> vertices;
 };
 
 #endif

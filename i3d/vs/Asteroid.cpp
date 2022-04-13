@@ -79,6 +79,10 @@ void Asteroid::generateAsteroidSize() {
 	maxAsteroidRadius = maxVertexLength * asteroidScale;
 }
 
+void Asteroid::generateAsteroidShape() {
+	
+}
+
 void Asteroid::display(std::vector<Asteroid*> asteroids) {
 	for (Asteroid* asteroid : asteroids) {
 

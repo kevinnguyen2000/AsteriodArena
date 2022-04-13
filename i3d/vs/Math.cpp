@@ -64,10 +64,10 @@ int Math::calculateYFromX(int x, float radius) {
 	int yCoord = radius * radius - x * x;
 	yCoord = sqrt(yCoord);
 	// Generate either minus or positive y Coord
-	srand(time(0));
-	int sign = rand() % 2;
-	// printf("sign: %d\n", sign);
-	if (sign == 0) {
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_int_distribution<std::mt19937::result_type> sign(0, 1);
+	if (sign(rng) == 0) {
 		yCoord = -yCoord;
 	}
 	//printf("YCoord: %d", yCoord);

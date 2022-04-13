@@ -1,10 +1,5 @@
-﻿  Asteroid.cpp
+﻿  Math.cpp
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(30,12): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(33,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(34,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(41,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(43,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(52,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(53,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(152,27): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.cpp(64,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.cpp(65,15): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   i3d.vcxproj -> C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\i3d64dbg.exe
