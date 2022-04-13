@@ -6,14 +6,15 @@ Asteroid::Asteroid() {
 	this->radiusVector = new Vector();
 	this->math = new Math();
 	this->spawnRadius = 0;
-	this->maxAsteroidRadius = 50;
+	this->maxAsteroidRadius = 0;
 	this->angle = 0;
 	this->dt = 0;
 	this->movementSpeed = generateMovementSpeed();
 	this->appeared = false;
-	this->asteroidRadius = 70;
 	this->asteroidScale = 5;
-	this->maxVertexLength = 10;
+	this->maxVertexLength = 0;
+	this->minVertexLength = 0;
+	generateAsteroidSize();
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -54,6 +55,30 @@ void Asteroid::generateSpawnPoint() {
 	// printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
 }
 
+void Asteroid::generateAsteroidSize() {
+	// Generate max size
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_int_distribution<std::mt19937::result_type> sizeRange(4, 16);
+	maxVertexLength = float (sizeRange(rng));
+	// printf("Max vertex length: %f", maxVertexLength);
+	// maxVertexLength = 10;
+
+	// subtract to get min size for vertex for different sizes
+	if (maxVertexLength >= 4 and maxVertexLength < 8) {
+		minVertexLength = maxVertexLength - 1;
+	}
+	if (maxVertexLength >= 8 and maxVertexLength < 12) {
+		minVertexLength = maxVertexLength - 3;
+	}
+	if (maxVertexLength >= 12 and maxVertexLength <= 16) {
+		minVertexLength = maxVertexLength - 4;
+	}
+
+	// set max asteroid radius
+	maxAsteroidRadius = maxVertexLength * asteroidScale;
+}
+
 void Asteroid::display(std::vector<Asteroid*> asteroids) {
 	for (Asteroid* asteroid : asteroids) {
 
@@ -65,74 +90,74 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 		glColor3f(0.5, 0.5, 0.5);
 		glTranslatef(asteroid->positionVector->getX(), asteroid->positionVector->getY(), 0.0f);
 		glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		glScalef(asteroidScale, asteroidScale, asteroidScale);
+		glScalef(asteroid->asteroidScale, asteroidScale, asteroidScale);
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(0, maxVertexLength, 0.0);
+		glVertex3f(0, asteroid->maxVertexLength, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(7, 7, 0.0);
+		glVertex3f(asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(0, -maxVertexLength, 0.0);
+		glVertex3f(0, -asteroid->maxVertexLength, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(-7, -7, 0.0);
+		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(-maxVertexLength, 0, 0.0);
+		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(-7, -7, 0.0);
+		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(-maxVertexLength, 0, 0.0);
+		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(-7, -7, 0.0);
+		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(-maxVertexLength, 0, 0.0);
+		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(-7, 7, 0.0);
+		glVertex3f(-asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(-7, 7, 0.0);
+		glVertex3f(-asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(0, maxVertexLength, 0.0);
+		glVertex3f(0, asteroid->maxVertexLength, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(maxVertexLength, 0, 0.0);
-		glVertex3f(7, 7, 0.0);
-		glVertex3f(0, 0, 0.0);
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		glVertex3f(maxVertexLength, 0, 0.0);
-		glVertex3f(7, -7, 0.0);
+		glVertex3f(asteroid->maxVertexLength, 0, 0.0);
+		glVertex3f(asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
 		glVertex3f(0, 0, 0.0);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);
+		glVertex3f(asteroid->maxVertexLength, 0, 0.0);
+		glVertex3f(asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
 		glVertex3f(0, 0, 0.0);
-		glVertex3f(7, -7, 0.0);
-		glVertex3f(0, -maxVertexLength, 0.0);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(0, 0, 0.0);
+		glVertex3f(asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
+		glVertex3f(0, -asteroid->maxVertexLength, 0.0);
 		glEnd();
 
 		// make outline of spaceship
 		glLineWidth(5.0);
 		glBegin(GL_LINE_LOOP);
 		glColor3f(0.3, 0.15, 0.1);
-		glVertex3f(0, 10, 0.0);
-		glVertex3f(7, 7, 0.0);
-		glVertex3f(10, 0, 0.0);
-		glVertex3f(7, -7, 0.0);
-		glVertex3f(0, -10, 0.0);
-		glVertex3f(-7, -7, 0.0);
-		glVertex3f(-10, 0, 0.0);
-		glVertex3f(-7, 7, 0.0);
+		glVertex3f(0, asteroid->maxVertexLength, 0.0);
+		glVertex3f(asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
+		glVertex3f(asteroid->maxVertexLength, 0, 0.0);
+		glVertex3f(asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
+		glVertex3f(0, -asteroid->maxVertexLength, 0.0);
+		glVertex3f(-asteroid->minVertexLength, -asteroid->minVertexLength, 0.0);
+		glVertex3f(-asteroid->maxVertexLength, 0, 0.0);
+		glVertex3f(-asteroid->minVertexLength, asteroid->minVertexLength, 0.0);
 		glEnd();
 
 		glPopMatrix();

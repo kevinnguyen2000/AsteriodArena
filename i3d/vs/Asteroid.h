@@ -30,6 +30,8 @@ public:
 
 	bool checkCollision(float xCoord, float yCoord, float radius);
 
+	void generateAsteroidSize();
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;
@@ -41,9 +43,9 @@ private:
 	float spawnRadius;
 	float maxAsteroidRadius;
 	bool appeared;
-	float asteroidRadius;
 	float asteroidScale;
 	float maxVertexLength;
+	float minVertexLength;
 };
 
 #endif
