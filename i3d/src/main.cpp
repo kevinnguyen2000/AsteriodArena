@@ -235,14 +235,22 @@ void checkAsteroidSpawn() {
 
 void checkBulletAsteroidCollision() {
 	// loop through all bullets and asteroids
-	
 	for (int i = 0; i < asteroids.size(); i++) {
 		for (int j = 0; j < bullets.size(); j++) {
-			if (asteroids[i]->checkBulletCollision(bullets[j]->getPositionVector().getX(), bullets[j]->getPositionVector().getY()) == true) {
-				// printf("COLLOSION");
+			// check bullet collision with asteroids, if collides destory both asteroid and bullet
+			if (asteroids[i]->checkCollision(bullets[j]->getPositionVector().getX(), bullets[j]->getPositionVector().getY()) == true) {
 				asteroids.erase(asteroids.begin() + i);
 				bullets.erase(bullets.begin() + j);
 			}
+		}
+	}
+}
+
+void checkPlayerAsteroidCollision() {
+	// lopp through all asteroids
+	for (int i = 0; i < asteroids.size(); i++) {
+		if (asteroids[i]->checkCollision(player->getPositionVector().getX(), player->getPositionVector().getY()) == true) {
+			reset_game();
 		}
 	}
 }
@@ -298,6 +306,10 @@ void update_game_state(float dt) {
 	// check bullet collision with asteroids
 	if (bullets.size() > 0 and asteroids.size() > 0) {
 		checkBulletAsteroidCollision();
+	}
+	// check asteroid collision with player
+	if (asteroids.size() > 0) {
+		checkPlayerAsteroidCollision();
 	}
 }
 

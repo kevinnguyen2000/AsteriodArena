@@ -28,7 +28,7 @@ public:
 
 	Vector getPositionVector();
 
-	bool checkBulletCollision(float bulletX, float bulletY);
+	bool checkCollision(float xCoord, float yCoord);
 
 private:
 	Vector* radiusVector;

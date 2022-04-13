@@ -1,9 +1,9 @@
 ﻿  main.cpp
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(30,12): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(24,28): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(306,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(342,10): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(343,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(318,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(354,10): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\src\main.cpp(355,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Asteroid.cpp
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Math.h(30,12): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\kevin\Documents\Uni work\Year 4 Sem 1\Interactive 3D Graphics and Animation\Assignment 1\Asteriod Arena\i3d\vs\Asteroid.cpp(31,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
