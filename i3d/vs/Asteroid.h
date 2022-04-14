@@ -30,9 +30,10 @@ public:
 
 	bool checkCollision(float xCoord, float yCoord, float radius);
 
-	void generateAsteroidSize();
-
 	void generateAsteroidShape();
+
+	void generateRotation();
+	void asteroidRotate(Asteroid asteroid);
 
 private:
 	Vector* radiusVector;
@@ -50,6 +51,8 @@ private:
 	float maxVertexLength;
 	float minVertexLength;
 	std::vector<Vector> vertices;
+	double rotationSpeed;
+	bool rotateClockWise;
 };
 
 #endif

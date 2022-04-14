@@ -15,7 +15,11 @@ Asteroid::Asteroid() {
 	this->asteroidScale = 5;
 	this->maxVertexLength = 0;
 	this->minVertexLength = 0;
+	this->rotationSpeed = 0;
+	this->rotateClockWise = false;
+	
 	generateAsteroidShape();
+	generateRotation();
 }
 
 // Sets spawn radius from center to corner of screen 
@@ -56,41 +60,15 @@ void Asteroid::generateSpawnPoint() {
 	// printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
 }
 
-/*
-void Asteroid::generateAsteroidSize() {
-	// Generate max size
-	std::random_device dev;
-	std::mt19937 rng(dev());
-	std::uniform_int_distribution<std::mt19937::result_type> sizeRange(4, 16);
-	maxVertexLength = float (sizeRange(rng));
-	// printf("Max vertex length: %f", maxVertexLength);
-	// maxVertexLength = 10;
-
-	// subtract to get min size for vertex for different sizes
-	if (maxVertexLength >= 4 and maxVertexLength < 8) {
-		minVertexLength = maxVertexLength - 1;
-	}
-	if (maxVertexLength >= 8 and maxVertexLength < 12) {
-		minVertexLength = maxVertexLength - 3;
-	}
-	if (maxVertexLength >= 12 and maxVertexLength <= 16) {
-		minVertexLength = maxVertexLength - 4;
-	}
-
-	// set max asteroid radius
-	maxAsteroidRadius = maxVertexLength * asteroidScale;
-}
-*/
-
 void Asteroid::generateAsteroidShape() {
 	// Determine if small, medium or large asteroid
 	std::random_device dev;
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> sizeRange(0, 2);
 	int size = sizeRange(rng);
-	printf("size: %d", size);
+	// printf("size: %d", size);
 
-	for (int i = 0; i < 360; i += 15) {
+	for (int i = 0; i < 360; i += 30) {
 		if (size == 0) {
 			std::uniform_int_distribution<std::mt19937::result_type> sizeSmall(4, 6);
 			asteriodRadius = sizeSmall(rng);
@@ -152,6 +130,26 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 		glPopMatrix();
 
 		asteroidMovement(*asteroid);
+		asteroidRotate(*asteroid);
+	}
+}
+
+void Asteroid::asteroidRotate(Asteroid asteroid) {
+	// check overflow
+	if (angle >= 360 or angle <= -360) {
+		angle = 0;
+	}
+	if (rotateClockWise == false) {
+		asteroid.rotationSpeed = asteroid.rotationSpeed / 50;
+		angle = angle + asteroid.rotationSpeed;
+		//printf("Asteroid angle: %f\n", angle);
+		//printf("Rotation speed: %f\n", asteroid.rotationSpeed);
+	}
+	else {
+		asteroid.rotationSpeed = asteroid.rotationSpeed / 50;
+		angle = angle - asteroid.rotationSpeed;
+		//printf("Rotation angle: %f\n", angle);
+		//printf("Rotation speed: %f\n", asteroid.rotationSpeed);
 	}
 }
 
@@ -209,5 +207,18 @@ bool Asteroid::checkCollision(float xCoord, float yCoord, float radius) {
 	}
 	else {
 		return false;
+	}
+}
+
+void Asteroid::generateRotation() {
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_int_distribution<std::mt19937::result_type> rotationSpeed(1, 2);
+
+	this->rotationSpeed = float (rotationSpeed(rng));
+	
+	std::uniform_int_distribution<std::mt19937::result_type> rotation(0, 1);
+	if (rotation(rng) == 1) {
+		this->rotateClockWise = true;
 	}
 }
