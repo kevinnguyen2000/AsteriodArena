@@ -3,6 +3,7 @@
 #include "../vs/Types.h"
 #include "../vs/Bullet.h"
 #include "../vs/Asteroid.h"
+#include "../vs/Missile.h"
 
 // Create arena object
 Arena* arena = new Arena();
@@ -24,6 +25,9 @@ float g_last_time = 0.0;
 float maxShipFireRate = 0.6;
 float shipFireRateCounter = 0;
 
+float maxShipMissileRate = 1;
+float shipMissileRateCounter = 0;
+
 // Vector of asteriods
 std::vector<Asteroid*> asteroids;
 Asteroid* asteroid = new Asteroid();
@@ -38,6 +42,10 @@ float asteroidWave = 1;
 // Vector for key states
 std::vector<bool> keys;
 int keysNum = 4;
+
+// Vector of missiles
+std::vector<Missile*> missiles;
+Missile* missile = new Missile();
 
 // Math helper
 Math* math = new Math();
@@ -70,6 +78,9 @@ void display()
 	if (asteroids.size() > 0) {
 		asteroid->display(asteroids);
 	}
+	if (missiles.size() > 0) {
+		missile->display(missiles);
+	}
 		
 	int err;
 	while ((err = glGetError()) != GL_NO_ERROR)
@@ -97,6 +108,8 @@ void keyboard(unsigned char key, int x, int y)
 	case 'd':
 		player->rotateRight();
 		break;
+	case 'z':
+		player->switchGunType();
 	default:
 		break;
 	}
@@ -181,10 +194,27 @@ void checkBulletBounds() {
 	*/
 }
 
+void fire_missile() {
+	Missile* newMissile = new Missile();
+
+	// shoots from tip of ship
+	player->multiplyDirectionVector();
+
+	newMissile->setMissilePositionVector(player->getPositionVector().getX() + player->getMultipliedDirectionVector().getX(), player->getPositionVector().getY() + player->getMultipliedDirectionVector().getY());
+	// Set missile direction to closet asteroid
+
+	
+	// add new missile to vector
+	missiles.push_back(newMissile);
+
+	shipMissileRateCounter = 0;
+}
+
 void fire_bullet() {
 	// Make new bullet on left click press
 	Bullet* newBullet = new Bullet();
 
+	// shoots from tip of ship
 	player->multiplyDirectionVector();
 
 	// Set in normal variables, add positon and direction vector to make bullet spawn at tip
@@ -293,8 +323,15 @@ void on_mouse_button(int button, int state, int x, int y)
 
 void checkKeyStates() {
 	if (keys[m1] == true) {
-		if (shipFireRateCounter >= maxShipFireRate) {
-			fire_bullet();
+		if (player->getGunType() == "normal") {
+			if (shipFireRateCounter >= maxShipFireRate) {
+				fire_bullet();
+			}
+		}
+		if (player->getGunType() == "missile") {
+			if (shipMissileRateCounter >= maxShipMissileRate) {
+				fire_missile();
+			}
 		}
 	}
 	if (keys[w_key] == true) {
@@ -326,6 +363,7 @@ void update_game_state(float dt) {
 	player->setDt(dt);
 	bullet->setDt(dt);
 	asteroid->setDt(dt);
+	missile->setDt(dt);
 
 	checkAsteroidSpawn();
 
@@ -348,6 +386,7 @@ float calc_dt() {
 	// update counter
 	shipFireRateCounter = shipFireRateCounter + dt;
 	asteroidSpawnRateCounter = asteroidSpawnRateCounter + dt;
+	shipMissileRateCounter = shipMissileRateCounter + dt;
 
 	return dt;
 }

@@ -15,6 +15,7 @@ Player::Player() {
 	this->mulitpliedDirectionVector = new Vector();
 	this->maxSpeed = 130;
 	this->playerRadius = 15.0;
+	this->gunType = "normal";
 }
 
 Player::~Player() {
@@ -47,23 +48,75 @@ void Player::display() {
 	glVertex3f(0, 0, 0.0);
 
 	glColor3f(0.5, 0.75, 1.0);
-	// Gun
-	// Left side of gun
-	glVertex3f(5, 4, 0.0);
-	glVertex3f(10, 2, 0.0);
-	glVertex3f(10, 0, 0.0);
-
-	// Right side of gun
-	glVertex3f(5, -4, 0.0);
-	glVertex3f(10, -2, 0.0);
-	glVertex3f(10, 0, 0.0);
-
-	// Tip of gun
-	glVertex3f(10, 2, 0.0);
-	glVertex3f(13, 0, 0.0);
-	glVertex3f(10, -2, 0.0);
 
 	glEnd();
+
+	if (gunType == "normal") {
+		// Gun display
+		glColor3f(0.5, 0.75, 1.0);
+		glBegin(GL_TRIANGLES);
+		// Left side of gun
+		glVertex3f(5, 4, 0.0);
+		glVertex3f(10, 2, 0.0);
+		glVertex3f(10, 0, 0.0);
+
+		// Right side of gun
+		glVertex3f(5, -4, 0.0);
+		glVertex3f(10, -2, 0.0);
+		glVertex3f(10, 0, 0.0);
+
+		// Tip of gun
+		glVertex3f(10, 2, 0.0);
+		glVertex3f(13, 0, 0.0);
+		glVertex3f(10, -2, 0.0);
+
+		glEnd();
+
+		// make outline gun
+		glLineWidth(2.0);
+		glBegin(GL_LINE_LOOP);
+		glColor3f(0.4, 0.6, 0.8);
+		glVertex3f(5, 4, 0.0);
+		glVertex3f(10, 2, 0.0);
+		glVertex3f(13, 0, 0.0);
+		glVertex3f(10, -2, 0.0);
+		glVertex3f(5, -4, 0.0);
+		glVertex3f(10, 0, 0.0);
+		glEnd();
+	}
+	
+	if (gunType == "missile") {
+		// Gun display
+		glColor3f(0.5, 0.5, 0.5);
+		glBegin(GL_TRIANGLES);
+		// Left side of gun
+		glVertex3f(5, 4, 0.0);
+		glVertex3f(13, 2, 0.0);
+		glVertex3f(10, 0, 0.0);
+
+		// Right side of gun
+		glVertex3f(5, -4, 0.0);
+		glVertex3f(13, -2, 0.0);
+		glVertex3f(10, 0, 0.0);
+
+		// Tip of gun
+		glVertex3f(13, 2, 0.0);
+		glVertex3f(13, -2, 0.0);
+		glVertex3f(10, 0, 0.0);
+
+		glEnd();
+
+		// make outline gun
+		glLineWidth(2.0);
+		glBegin(GL_LINE_LOOP);
+		glColor3f(0.6, 0.6, 0.7);
+		glVertex3f(5, 4, 0.0);
+		glVertex3f(13, 2, 0.0);
+		glVertex3f(13, -2, 0.0);
+		glVertex3f(5, -4, 0.0);
+		glVertex3f(10, 0, 0.0);
+		glEnd();
+	}
 	
 	// this is just so we can see where its pointing
 	glBegin(GL_LINES);
@@ -82,18 +135,6 @@ void Player::display() {
 	glVertex3f(0, -8, 0.0);
 	glVertex3f(-10, -10, 0.0);
 	glVertex3f(0, 0, 0.0);
-	glEnd();
-
-	// make outline gun
-	glLineWidth(2.0);
-	glBegin(GL_LINE_LOOP);
-	glColor3f(0.4, 0.6, 0.8);
-	glVertex3f(5, 4, 0.0);
-	glVertex3f(10, 2, 0.0);
-	glVertex3f(13, 0, 0.0);
-	glVertex3f(10, -2, 0.0);
-	glVertex3f(5, -4, 0.0);
-	glVertex3f(10, 0, 0.0);
 	glEnd();
 
 	glPopMatrix();
@@ -189,5 +230,18 @@ Vector Player::getMultipliedDirectionVector() {
 
 float Player::getPlayerRadius() {
 	return playerRadius;
+}
+
+void Player::switchGunType() {
+	if (gunType == "normal") {
+		gunType = "missile";
+	}
+	else {
+		gunType = "normal";
+	}
+}
+
+std::string Player::getGunType() {
+	return gunType;
 }
 

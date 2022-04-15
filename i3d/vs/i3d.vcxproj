@@ -160,12 +160,14 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="Missile.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Player.h" />

@@ -38,6 +38,9 @@ public:
 
 	float getPlayerRadius();
 
+	void switchGunType();
+	std::string getGunType();
+
 	// private class variables
 private:
 	Vector* directionVector;
@@ -49,6 +52,7 @@ private:
 	Math* math;
 	float maxSpeed;
 	float playerRadius;
+	std::string gunType;
 };
 
 #endif
