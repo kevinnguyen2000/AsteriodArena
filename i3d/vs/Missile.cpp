@@ -6,7 +6,7 @@ Missile::Missile() {
 	this->math = new Math();
 	this->angle = 0;
 	this->dt = 0;
-	this->movementSpeed = 200;
+	this->movementSpeed = 300;
 	this->scale = 2;
 	this->radius = 12;
 }

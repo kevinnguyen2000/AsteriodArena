@@ -35,6 +35,9 @@ public:
 	void generateRotation();
 	void asteroidRotate(Asteroid asteroid);
 
+	void decreaseHP(float damage);
+	int getHP();
+
 private:
 	Vector* radiusVector;
 	Vector* directionVector;
@@ -53,6 +56,7 @@ private:
 	std::vector<Vector> vertices;
 	double rotationSpeed;
 	bool rotateClockWise;
+	int hitPoints;
 };
 
 #endif

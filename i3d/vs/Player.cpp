@@ -176,7 +176,7 @@ void Player::slowDown() {
 
 void Player::rotateLeft() {
 	// sets turn angle
-	angle = angle + 5;
+	angle = angle + 0.1;
 	// check for overflow
 	if (angle >= 360) {
 		angle = 0;
@@ -187,7 +187,7 @@ void Player::rotateLeft() {
 
 void Player::rotateRight() {
 	// sets turn angle
-	angle = angle - 5;
+	angle = angle - 0.1;
 	// check for overflow
 	if (angle <= -360) {
 		angle = 0;

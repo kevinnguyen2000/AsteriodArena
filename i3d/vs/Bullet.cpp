@@ -3,7 +3,7 @@
 Bullet::Bullet() {
 	this->directionVector = new Vector();
 	this->positionVector = new Vector();
-	this->movementSpeed = 350;
+	this->movementSpeed = 400;
 	this->dt = 0;
 	this->angle = 0;
 	this->math = new Math();

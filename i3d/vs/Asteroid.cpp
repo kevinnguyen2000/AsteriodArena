@@ -17,6 +17,7 @@ Asteroid::Asteroid() {
 	this->minVertexLength = 0;
 	this->rotationSpeed = 0;
 	this->rotateClockWise = false;
+	this->hitPoints = 0;
 	
 	generateAsteroidShape();
 	generateRotation();
@@ -66,7 +67,6 @@ void Asteroid::generateAsteroidShape() {
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> sizeRange(0, 2);
 	int size = sizeRange(rng);
-	// printf("size: %d", size);
 
 	for (int i = 0; i < 360; i += 30) {
 		if (size == 0) {
@@ -76,6 +76,7 @@ void Asteroid::generateAsteroidShape() {
 			currentDirection.setX(currentDirection.getX() * asteriodRadius);
 			currentDirection.setY(currentDirection.getY() * asteriodRadius);
 			vertices.push_back(currentDirection);
+			hitPoints = 2;
 
 		}
 		if (size == 1) {
@@ -85,6 +86,7 @@ void Asteroid::generateAsteroidShape() {
 			currentDirection.setX(currentDirection.getX() * asteriodRadius);
 			currentDirection.setY(currentDirection.getY() * asteriodRadius);
 			vertices.push_back(currentDirection);
+			hitPoints = 3;
 		}
 		if (size == 2) {
 			std::uniform_int_distribution<std::mt19937::result_type> sizeLarge(14, 16);
@@ -93,8 +95,10 @@ void Asteroid::generateAsteroidShape() {
 			currentDirection.setX(currentDirection.getX() * asteriodRadius);
 			currentDirection.setY(currentDirection.getY() * asteriodRadius);
 			vertices.push_back(currentDirection);
+			hitPoints = 4;
 		}
 	}
+	// printf("HP: %d", hitPoints);
 
 	// set max asteroid radius
 	maxAsteroidRadius = asteriodRadius * asteroidScale;
@@ -118,10 +122,21 @@ void Asteroid::display(std::vector<Asteroid*> asteroids) {
 
 		glEnd();
 
-		// make outline of asteroid
+		// make outline of asteroid based on hitpoints
+		if (asteroid->hitPoints == 4) {
+			glColor3f(0.3, 0.15, 0.1);
+		}
+		if (asteroid->hitPoints == 3) {
+			glColor3f(0.55, 0.47, 0.14);
+		}
+		if (asteroid->hitPoints == 2) {
+			glColor3f(0.6, 0.8, 0.2);
+		}
+		if (asteroid->hitPoints == 1) {
+			glColor3f(1.0, 0.1, 0.1);
+		}
 		glLineWidth(2.0);
 		glBegin(GL_LINE_LOOP);
-		glColor3f(0.3, 0.15, 0.1);
 		for (Vector vertex : asteroid->vertices) {
 			glVertex3f(vertex.getX(), vertex.getY(), 0.0);
 		}
@@ -221,4 +236,12 @@ void Asteroid::generateRotation() {
 	if (rotation(rng) == 1) {
 		this->rotateClockWise = true;
 	}
+}
+
+void Asteroid::decreaseHP(float damage) {
+	hitPoints = hitPoints - damage;
+}
+
+int Asteroid::getHP() {
+	return hitPoints;
 }
