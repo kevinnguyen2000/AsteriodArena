@@ -21,14 +21,39 @@ void Missile::display(std::vector<Missile*> missiles) {
 		//printf("First bullet: (%f) (%f) \n", bullet.positionVector->getX(), bullet.positionVector->getY());
 
 		glColor3f(1.0, 1.0, 1.0);
-		glPointSize(5.0);
 		glTranslatef(missile->positionVector->getX(), missile->positionVector->getY(), 0.0f);
 		glRotatef(missile->angle, 0.0f, 0.0f, 1.0f);
-		glScalef(0.0f, 0.0f, 0.0f);
+		glScalef(2.0f, 2.0f, 2.0f);
 
-		glBegin(GL_POINTS);
-		glVertex3f(0.0, 0.0, 0.0);
+		glBegin(GL_POLYGON);
+		// Body of missile
+		glVertex3f(-5, 1, 0.0);
+		glVertex3f(3, 1, 0.0);
+		glVertex3f(6, 0, 0.0);
+		glVertex3f(3, -1, 0.0);
+		glVertex3f(-5, -1, 0.0);
 		glEnd();
+
+		glColor3f(1.0, 0.0, 0.0);
+		// Fins of missile
+		glBegin(GL_TRIANGLES);
+		glVertex3f(-5, 1, 0.0);
+		glVertex3f(-5, 3, 0.0);
+		glVertex3f(-3, 1, 0.0);
+
+		glVertex3f(-5, -1, 0.0);
+		glVertex3f(-5, -3, 0.0);
+		glVertex3f(-3, -1, 0.0);
+
+		glVertex3f(0, -1, 0.0);
+		glVertex3f(0, -2, 0.0);
+		glVertex3f(1, -1, 0.0);
+
+		glVertex3f(0, 1, 0.0);
+		glVertex3f(0, 2, 0.0);
+		glVertex3f(1, 1, 0.0);
+		glEnd();
+
 		glPopMatrix();
 
 		// Method to track closet asteroid
