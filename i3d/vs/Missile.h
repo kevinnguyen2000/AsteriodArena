@@ -16,6 +16,15 @@ public:
 	void setMissilePositionVector(float x, float y);
 	void setDirectionVector(float x, float y);
 
+	float checkDistance(float xCoord, float yCoord, float radius);
+
+	float getRadius();
+
+	void missileDirectionToAsteroid(Vector* asteroid);
+	void missileDirection(Missile missile);
+
+	Vector getPositionVector();
+
 private:
 	Vector* directionVector;
 	Vector* positionVector;
@@ -23,6 +32,8 @@ private:
 	float dt;
 	float angle;
 	Math* math;
+	float radius;
+	float scale;
 };
 
 #endif
