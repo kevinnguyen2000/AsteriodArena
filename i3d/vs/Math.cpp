@@ -9,11 +9,6 @@ Vector Math::degreeToDirectionVector(float degrees) {
 	Vector* directionVector = new Vector;
 	directionVector->setX(x);
 	directionVector->setY(y);
-	// tester
-	/*
-	printf("Degrees: %f", degrees);
-	printf( "X and Y: (%f, %f)\n", x, y);
-	*/
 
 	return *directionVector;
 }
@@ -70,7 +65,6 @@ int Math::calculateYFromX(int x, float radius) {
 	if (sign(rng) == 0) {
 		yCoord = -yCoord;
 	}
-	//printf("YCoord: %d", yCoord);
 	return yCoord;
 }
 

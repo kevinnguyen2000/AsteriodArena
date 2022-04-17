@@ -20,8 +20,6 @@ void Missile::display(std::vector<Missile*> missiles) {
 		glPushMatrix();
 		glLoadIdentity();
 
-		//printf("First bullet: (%f) (%f) \n", bullet.positionVector->getX(), bullet.positionVector->getY());
-
 		glColor3f(1.0, 1.0, 1.0);
 		glTranslatef(missile->positionVector->getX(), missile->positionVector->getY(), 0.0f);
 		glRotatef(missile->angle, 0.0f, 0.0f, 1.0f);
@@ -75,11 +73,8 @@ void Missile::missileDirection(Missile missile) {
 
 void Missile::missileDirectionToAsteroid(Vector* asteroid) {
 	*directionVector = math->subtractVector(asteroid, positionVector);
-	// tester
-	// printf("Asteroid direction vector: %f %f", directionVector->getX(), directionVector->getY());
 	float a = math->directionVectorToDegree(directionVector);
 	angle = a;
-	// printf("Angle: %f", a);
 	*directionVector = math->degreeToDirectionVector(a);
 }
 

@@ -3,7 +3,7 @@
 Bullet::Bullet() {
 	this->directionVector = new Vector();
 	this->positionVector = new Vector();
-	this->movementSpeed = 400;
+	this->movementSpeed = 600;
 	this->dt = 0;
 	this->angle = 0;
 	this->math = new Math();
@@ -14,8 +14,6 @@ void Bullet::display(std::vector<Bullet*> bullets) {
 
 		glPushMatrix();
 		glLoadIdentity();
-
-		//printf("First bullet: (%f) (%f) \n", bullet.positionVector->getX(), bullet.positionVector->getY());
 
 		glColor3f(1.0, 1.0, 1.0);
 		glPointSize(2.0);

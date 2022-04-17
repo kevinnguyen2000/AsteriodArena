@@ -29,8 +29,6 @@ void Asteroid::setSpawnRadius(float x, float y) {
 	radiusVector->setX(x/2);
 	radiusVector->setY(y/2);
 	spawnRadius = math->findVectorLength(radiusVector) + maxAsteroidRadius;
-	// spawnRadius = 300;
-	// printf("Spawn radius: %f \n", spawnRadius);
 }
 
 void Asteroid::generateSpawnPoint() {
@@ -38,7 +36,6 @@ void Asteroid::generateSpawnPoint() {
 	// Use radius vector to set min max for x coord number generation
 	int maxRandNumber = ceil (spawnRadius * 2);
 	int randMinus = spawnRadius;
-	// printf("MaxRandNumber: %d\n", maxRandNumber);
 
 	// Generate random x coord 
 	std::random_device dev;
@@ -58,7 +55,6 @@ void Asteroid::generateSpawnPoint() {
 	positionVector->setX(asteroidXCoord);
 	positionVector->setY(asteroidYCoord);
 
-	// printf("Asteroid pos: %f %f\n", positionVector->getX(), positionVector->getY());
 }
 
 void Asteroid::generateAsteroidShape() {
@@ -98,7 +94,6 @@ void Asteroid::generateAsteroidShape() {
 			hitPoints = 4;
 		}
 	}
-	// printf("HP: %d", hitPoints);
 
 	// set max asteroid radius
 	maxAsteroidRadius = asteriodRadius * asteroidScale;
@@ -157,24 +152,17 @@ void Asteroid::asteroidRotate(Asteroid asteroid) {
 	if (rotateClockWise == false) {
 		asteroid.rotationSpeed = asteroid.rotationSpeed / 50;
 		angle = angle + asteroid.rotationSpeed;
-		//printf("Asteroid angle: %f\n", angle);
-		//printf("Rotation speed: %f\n", asteroid.rotationSpeed);
 	}
 	else {
 		asteroid.rotationSpeed = asteroid.rotationSpeed / 50;
 		angle = angle - asteroid.rotationSpeed;
-		//printf("Rotation angle: %f\n", angle);
-		//printf("Rotation speed: %f\n", asteroid.rotationSpeed);
 	}
 }
 
 void Asteroid::asteroidDirection(Vector* playerVector) {
 	*directionVector = math->subtractVector(playerVector, positionVector);
-	// tester
-	// printf("Asteroid direction vector: %f %f", directionVector->getX(), directionVector->getY());
 	float a = math->directionVectorToDegree(directionVector);
 	*directionVector = math->degreeToDirectionVector(a);
-	// printf("Asteroid direction vector: %f %f", directionVector->getX(), directionVector->getY());
 }
 
 void Asteroid::asteroidMovement(Asteroid asteroid) {
@@ -213,10 +201,6 @@ Vector Asteroid::getPositionVector() {
 
 bool Asteroid::checkCollision(float xCoord, float yCoord, float radius) {
 	float distance = sqrt(((positionVector->getX() - xCoord) * (positionVector->getX() - xCoord) + (positionVector->getY() - yCoord) * (positionVector->getY() - yCoord)));
-	//printf("Asteroid position: (%f) (%f)\n", positionVector->getX(), positionVector->getY());
-	//printf("Bullet position: (%f) (%f)\n", xCoord, yCoord);
-	//printf("distance: %f\n", distance);
-	// printf("Max asteroid radius: %f", maxAsteroidRadius);
 	if (maxAsteroidRadius + radius >= distance) {
 		return true;
 	}

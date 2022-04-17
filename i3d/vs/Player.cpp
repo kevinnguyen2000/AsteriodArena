@@ -13,7 +13,7 @@ Player::Player() {
 	this->directionVector = new Vector();
 	*directionVector = math->degreeToDirectionVector(angle);
 	this->mulitpliedDirectionVector = new Vector();
-	this->maxSpeed = 130;
+	this->maxSpeed = 140;
 	this->playerRadius = 15.0;
 	this->gunType = "normal";
 }
@@ -154,12 +154,11 @@ void Player::moveFoward() {
 	
 	positionVector->setX(newCoords->getX());
 	positionVector->setY(newCoords->getY());
-	//printf("Positionvector, X and Y: (%f, %f)\n", positionVector->getX(), positionVector->getY());
 }
 
 void Player::slowDown() {
 	if (movementSpeed >= 0) {
-		this->movementSpeed = movementSpeed - 0.025;
+		this->movementSpeed = movementSpeed - 0.020;
 	}
 	else {
 		this->movementSpeed = 0;
@@ -171,12 +170,11 @@ void Player::slowDown() {
 
 	positionVector->setX(newCoords->getX());
 	positionVector->setY(newCoords->getY());
-	//printf("Positionvector, X and Y: (%f, %f)\n", positionVector->getX(), positionVector->getY());
 }
 
 void Player::rotateLeft() {
 	// sets turn angle
-	angle = angle + 0.1;
+	angle = angle + 0.125;
 	// check for overflow
 	if (angle >= 360) {
 		angle = 0;
@@ -187,17 +185,13 @@ void Player::rotateLeft() {
 
 void Player::rotateRight() {
 	// sets turn angle
-	angle = angle - 0.1;
+	angle = angle - 0.125;
 	// check for overflow
 	if (angle <= -360) {
 		angle = 0;
 	}
 	// assign in new angle to Player direction vector
 	*directionVector = math->degreeToDirectionVector(angle);
-	// tester
-	/*
-	printf("Directionvector, X and Y: (%f, %f)\n", directionVector->getX(), directionVector->getY());
-	*/
 }
 
 void Player::setDt(float dt) {

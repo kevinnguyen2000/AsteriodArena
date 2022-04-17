@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <cmath>
 #include <random>
+#include <sstream>
 
 #define m1 0
 #define a_key 1

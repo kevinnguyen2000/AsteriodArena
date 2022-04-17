@@ -50,6 +50,18 @@ Missile* missile = new Missile();
 // Math helper
 Math* math = new Math();
 
+// Text
+std::string scoreText = "Score: ";
+int score = 0;
+std::string scoreString = "0";
+const char* scoreChar = "0";
+std::string timeText = "Time: ";
+int timeElasped = 0;
+std::string timeString = "0";
+const char* timeChar = "0";
+
+bool gameOver = false;
+
 void reset_game() {
 	// Set collision back to false
 	arena->setCollisionFalse();
@@ -63,6 +75,37 @@ void reset_game() {
 	asteroidWave = 1;
 	// clear all missiles
 	missiles.clear();
+	// set score back to zero
+	score = 0;
+	scoreString = "0";
+	scoreChar = "0";
+	// reset time
+	gameOver = true;
+}
+
+void render_string(float x, float y, void* font, const char* string)
+{
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+
+	// Set the projection - use this to render text
+	gluOrtho2D(0, arena->getArenaWidth(), 0, arena->getArenaHeight());
+	glMatrixMode(GL_MODELVIEW);
+
+	glRasterPos2f(x, y);
+	int len = (int)strlen(string);
+	for (int i = 0; i < len; i++)
+	{
+		glutBitmapCharacter(font, string[i]);
+	}
+
+	glMatrixMode(GL_PROJECTION);
+
+	// Restore the original projection matrix for rendering everything else
+	glPopMatrix();
+
+	glMatrixMode(GL_MODELVIEW);
 }
 
 void display()
@@ -83,6 +126,12 @@ void display()
 	if (missiles.size() > 0) {
 		missile->display(missiles);
 	}
+
+	glColor3f(1.0, 1.0, 1.0);
+	render_string(timeText.length() * 5, arena->getArenaHeight() - timeText.length()*8, GLUT_BITMAP_TIMES_ROMAN_24, "Time: ");
+	render_string(timeText.length() * 16, arena->getArenaHeight() - scoreText.length() * 7, GLUT_BITMAP_TIMES_ROMAN_24, timeChar);
+	render_string(arena->getArenaWidth() - timeText.length()*20, arena->getArenaHeight() - timeText.length()*8, GLUT_BITMAP_TIMES_ROMAN_24, "Score: ");
+	render_string(arena->getArenaWidth() - timeText.length() * 9, arena->getArenaHeight() - timeText.length() * 8, GLUT_BITMAP_TIMES_ROMAN_24, scoreChar);
 		
 	int err;
 	while ((err = glGetError()) != GL_NO_ERROR)
@@ -106,11 +155,9 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	case 'a':
 		keys[a_key] = true;
-		//player->rotateLeft();
 		break;
 	case 'd':
 		keys[d_key] = true;
-		//player->rotateRight();
 		break;
 	case 'z':
 		player->switchGunType();
@@ -131,11 +178,9 @@ void on_key_release(unsigned char key, int x, int y) {
 		break;
 	case 'a':
 		keys[a_key] = false;
-		//player->rotateLeft();
 		break;
 	case 'd':
 		keys[d_key] = false;
-		//player->rotateRight();
 		break;
 	default:
 		break;
@@ -168,13 +213,12 @@ void checkClosetAsteroidToMissile() {
 					// check for closet asteroid
 					if (missiles[j]->checkDistance(asteroids[i]->getPositionVector().getX(), asteroids[i]->getPositionVector().getY(), missiles[j]->getRadius()) < nearestDistance) {
 						nearestDistance = missiles[j]->checkDistance(asteroids[i]->getPositionVector().getX(), asteroids[i]->getPositionVector().getY(), missiles[j]->getRadius());
-						// printf("Nearest distance: %f", nearestDistance);
-						// printf("Closet asteroid: %f %f\n", asteroids[i]->getPositionVector().getX(), asteroids[i]->getPositionVector().getY());
 						// Set missile direction towards the nearest asteroid
 						Vector* asteroidPositionVector = new Vector();
 						asteroidPositionVector->setX(asteroids[i]->getPositionVector().getX());
 						asteroidPositionVector->setY(asteroids[i]->getPositionVector().getY());
 						missiles[j]->missileDirectionToAsteroid(asteroidPositionVector);
+						break;
 					}
 				}
 			}
@@ -206,61 +250,6 @@ void checkBulletBounds() {
 			delete bullets[i];
 			bullets[i] = nullptr;
 			bullets.erase(bullets.begin() + i);
-		}
-		else {
-			i++;
-		}
-	}
-	/*
-	auto it = bullets.begin();
-	while (it != bullets.end()) {
-		// checks left wall
-		if (it->getPositionVector().getX() < -arena->getArenaWidth() / 2) {
-			it = bullets.erase(it);
-		}
-		// checks top wall
-		if (it->getPositionVector().getY() > arena->getArenaHeight() /2) {
-			it = bullets.erase(it);
-		}
-		// checks right wall
-		if (it->getPositionVector().getX() > arena->getArenaWidth() / 2) {
-			it = bullets.erase(it);
-		}
-		// checks bottom wall
-		if (it->getPositionVector().getY() < -arena->getArenaHeight() / 2) {
-			it = bullets.erase(it);
-		}
-		else {
-			it++;
-		}
-	}
-	*/
-}
-
-void checkMissileBounds() {
-	for (int i = 0; i < missiles.size();) {
-		if (missiles[i]->getPositionVector().getX() < -arena->getArenaWidth() / 2) {
-			delete missiles[i];
-			missiles[i] = nullptr;
-			missiles.erase(missiles.begin() + i);
-		}
-		// checks top wall
-		if (missiles[i]->getPositionVector().getY() > arena->getArenaHeight() / 2) {
-			delete missiles[i];
-			missiles[i] = nullptr;
-			missiles.erase(missiles.begin() + i);
-		}
-		// checks right wall
-		if (missiles[i]->getPositionVector().getX() > arena->getArenaWidth() / 2) {
-			delete missiles[i];
-			missiles[i] = nullptr;
-			missiles.erase(missiles.begin() + i);
-		}
-		// checks bottom wall
-		if (missiles[i]->getPositionVector().getY() < -arena->getArenaHeight() / 2) {
-			delete missiles[i];
-			missiles[i] = nullptr;
-			missiles.erase(missiles.begin() + i);
 		}
 		else {
 			i++;
@@ -301,28 +290,6 @@ void fire_bullet() {
 
 	// check if bullet is outside arena bounds
 	checkBulletBounds();
-	
-	/*
-	for (auto bullet = std::begin(bullets); bullet != std::end(bullets); ++bullet) {
-		printf("Bullets x and y: (%f) (%f) \n", bullet->getPositionVector().getX(), bullet->getPositionVector().getY());
-	}
-	printf("\n");
-	*/
-
-	/*
-	float a = bullets->front().getPositionVector().getX();
-	float b = bullets->front().getPositionVector().getY();
-
-	float n = bullets->back().getPositionVector().getX();
-	float m = bullets->back().getPositionVector().getY();
-
-	float bulletsSize = bullets->size();
-
-
-	printf("First bullet: (%f) (%f) \n", a, b);
-	printf("Last bullet: (%f) (%f) \n", n, m);
-	printf("Bullets size: (%f) \n", bulletsSize);
-	*/
 }
 
 void checkAsteroidSpawn() {
@@ -367,6 +334,10 @@ void checkBulletAsteroidCollision() {
 					asteroids[i] = nullptr;
 					asteroids.erase(asteroids.begin() + i);
 					asteroidDestroyed = true;
+					// add score by one
+					score = score + 1;
+					scoreString = std::to_string(score);
+					scoreChar = scoreString.c_str();
 				}
 				break;
 			}
@@ -394,6 +365,10 @@ void checkMissileAsteroidCollision() {
 					asteroids[i] = nullptr;
 					asteroids.erase(asteroids.begin() + i);
 					asteroidDestroyed = true;
+					// add score by one
+					score = score + 1;
+					scoreString = std::to_string(score);
+					scoreChar = scoreString.c_str();
 				}
 				break;
 			}
@@ -481,9 +456,6 @@ void update_game_state(float dt) {
 
 	// check if an asteroid needs to be erased
 	checkAsteroidHasAppeared();
-	
-	// check if missile is out of boundsa
-	checkMissileBounds();
 
 	// check bullet collision with asteroids
 	if (bullets.size() > 0 and asteroids.size() > 0) {
@@ -501,14 +473,24 @@ void update_game_state(float dt) {
 
 // function for calculating dt , from lec 2
 float calc_dt() {
-	float cur_time = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
-	float dt = cur_time - g_last_time;
-	g_last_time = cur_time;
+	float cur_time = glutGet(GLUT_ELAPSED_TIME) / 1000.0 - timeElasped;
+	float dt_time = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+	float dt = dt_time - g_last_time;
+	g_last_time = dt_time;
 
 	// update counter
 	shipFireRateCounter = shipFireRateCounter + dt;
 	asteroidSpawnRateCounter = asteroidSpawnRateCounter + dt;
 	shipMissileRateCounter = shipMissileRateCounter + dt;
+
+	// update game timer
+	timeString = std::to_string(int(cur_time));
+	timeChar = timeString.c_str();
+
+	if (gameOver == true) {
+		timeElasped = timeElasped + cur_time;
+		gameOver = false;
+	}
 
 	return dt;
 }
